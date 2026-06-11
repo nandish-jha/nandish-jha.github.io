@@ -164,7 +164,7 @@ typeBoot();
       a.innerHTML = `
         <span class="r-name">${r.name}</span>
         <span class="r-desc">${r.description ? escapeHtml(r.description) : "—"}</span>
-        <span class="r-meta">${r.language || "mixed"} · pushed ${r.pushed_at.slice(0, 10)}</span>`;
+        <span class="r-meta">${r.language}</span>`;
       grid.appendChild(a);
     }
   } catch (e) {
