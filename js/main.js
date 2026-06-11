@@ -105,7 +105,7 @@ typeBoot();
   addPath(d, "#62D2E8", 600);
 
   // bus value labels
-  const labels = ["CE_2024", "CS_2027", "DV_ROLE", "0xC0FFEE"];
+  const labels = ["CE_2024", "CS_2026", "DV_ROLE", "0xC0FFEE"];
   labels.forEach((txt, i) => {
     const t = document.createElementNS(NS, "text");
     t.setAttribute("x", X0 + 16 + i * seg);
