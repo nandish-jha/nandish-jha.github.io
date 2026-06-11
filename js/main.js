@@ -5,7 +5,7 @@
 /* ─── EDIT ME ───────────────────────────────────────────────
    One place for everything personal. Change values here only. */
 const CONFIG = {
-  email: "you@example.com",          // <-- set your real email
+  email: "nandish.d.jha@gmail.com",          // <-- set your real email
   githubUser: "nandish-jha",
   // Repos already shown as featured cards — excluded from the live grid
   featured: [
