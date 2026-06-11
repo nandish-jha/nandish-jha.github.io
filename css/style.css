@@ -343,7 +343,7 @@ a:focus-visible, button:focus-visible{ outline:2px solid var(--amber); outline-o
 /* ─────────── BEYOND ─────────── */
 .beyond-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns:repeat(2, 1fr);
   gap:18px;
 }
 .beyond-card{
