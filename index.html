@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nandish Jha — Hardware Verification Engineer</title>
+<meta name="description" content="Nandish Jha — Computer Engineering graduate and CS student specializing in hardware verification: SystemVerilog, UVM, FPGA, embedded systems." />
+<meta property="og:title" content="Nandish Jha — Hardware Verification Engineer" />
+<meta property="og:description" content="SystemVerilog · UVM · FPGA · Embedded. Projects, skills, resume." />
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/135614831?v=4" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>▮</text></svg>" />
+
+<!-- ============================================================
+     EDIT ME: personal config lives in js/main.js (CONFIG object)
+     Drop your compiled resume at assets/Nandish_Jha_Resume.pdf
+     ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ░░ SIGNAL PANE (nav) — styled like a waveform viewer's signal list ░░ -->
+<nav class="signal-pane" id="signalPane" aria-label="Section navigation">
+  <div class="pane-head">
+    <span class="dot dot-r"></span><span class="dot dot-a"></span><span class="dot dot-g"></span>
+    <span class="pane-title">wave.do</span>
+  </div>
+  <ul class="signal-list">
+    <li><a href="#boot"     class="sig active"><span class="sig-addr">0x00</span><span class="sig-name">boot</span><span class="sig-val">1'b1</span></a></li>
+    <li><a href="#about"    class="sig"><span class="sig-addr">0x04</span><span class="sig-name">about</span><span class="sig-val">8'hNJ</span></a></li>
+    <li><a href="#skills"   class="sig"><span class="sig-addr">0x08</span><span class="sig-name">skills</span><span class="sig-val">32'hC0DE</span></a></li>
+    <li><a href="#projects" class="sig"><span class="sig-addr">0x0C</span><span class="sig-name">projects</span><span class="sig-val">24'd24</span></a></li>
+    <li><a href="#resume"   class="sig"><span class="sig-addr">0x10</span><span class="sig-name">resume</span><span class="sig-val">.pdf</span></a></li>
+    <li><a href="#beyond"   class="sig"><span class="sig-addr">0x14</span><span class="sig-name">beyond</span><span class="sig-val">4'b1111</span></a></li>
+    <li><a href="#contact"  class="sig"><span class="sig-addr">0x18</span><span class="sig-name">contact</span><span class="sig-val">tx_en</span></a></li>
+  </ul>
+  <div class="pane-foot">
+    <span class="status-led"></span> sim running · 0 errors
+  </div>
+</nav>
+
+<button class="pane-toggle" id="paneToggle" aria-label="Toggle navigation">≡ signals</button>
+
+<main class="wave-window">
+
+  <!-- ════════ 0x00 BOOT / HERO ════════ -->
+  <section id="boot" class="section hero">
+    <div class="boot-log" id="bootLog" aria-hidden="true"></div>
+
+    <h1 class="hero-name">NANDISH<br/>JHA</h1>
+    <p class="hero-role">Hardware Verification <span class="accent-a">//</span> Digital Design <span class="accent-a">//</span> Embedded Systems</p>
+
+    <div class="hero-flags">
+      <span class="flag flag-pass">OPEN_TO_WORK = 1'b1</span>
+      <span class="flag">LOC = SASKATOON_SK_CA</span>
+      <span class="flag">RELOCATE = 1'b1</span>
+      <span class="flag">CITIZEN = CA</span>
+    </div>
+
+    <!-- Signature element: live waveform -->
+    <div class="wave-card" aria-label="Decorative animated waveform">
+      <div class="wave-labels">
+        <span>clk</span><span>rst_n</span><span>career_bus[31:0]</span>
+      </div>
+      <svg id="waveSvg" viewBox="0 0 760 190" preserveAspectRatio="none" role="img" aria-hidden="true"></svg>
+    </div>
+
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#projects">run_test("projects")</a>
+      <a class="btn" href="#contact">$display("hire me")</a>
+    </div>
+  </section>
+
+  <!-- ════════ 0x04 ABOUT ════════ -->
+  <section id="about" class="section">
+    <h2 class="sec-head"><span class="sec-addr">0x04</span> ABOUT</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I verify silicon before it ships. Computer Engineering graduate (B.Sc., University of Saskatchewan, 2024), now completing a second B.Sc. in Computer Science — Computer Systems specialization (expected Apr 2027).</p>
+        <p>My home turf is the testbench: <span class="hl">SystemVerilog</span>, <span class="hl">UVM</span>, constrained-random stimulus, functional coverage, and waveform debug in <span class="hl">QuestaSim</span>. Below the testbench, I build RTL in Verilog/VHDL on Intel/Altera FPGAs. Above it, I write the Python, C, and TCL that hold real verification flows together.</p>
+        <p>I also ship on bare metal — Raspberry Pi, Pico, ESP32, RTOS (MicroC/OS-II) — because hardware you can't bring up isn't verified, it's theoretical.</p>
+      </div>
+      <div class="about-spec">
+        <table class="spec-table">
+          <tr><td>DEGREE_0</td><td>B.Sc. Computer Engineering, USask '24</td></tr>
+          <tr><td>DEGREE_1</td><td>B.Sc. Computer Science (Systems), '27</td></tr>
+          <tr><td>TARGET</td><td>DV · ASIC · DFT · Embedded</td></tr>
+          <tr><td>GEO</td><td>Canada + USA · remote-ready</td></tr>
+          <tr><td>STATUS</td><td><span class="pass">SEEKING: FT / co-op / intern</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ 0x08 SKILLS (register map) ════════ -->
+  <section id="skills" class="section">
+    <h2 class="sec-head"><span class="sec-addr">0x08</span> SKILL REGISTER MAP</h2>
+    <div class="regmap-wrap">
+      <table class="regmap">
+        <thead><tr><th>OFFSET</th><th>REGISTER</th><th>FIELDS</th><th>ACCESS</th></tr></thead>
+        <tbody>
+          <tr><td>0x00</td><td>VERIF_CTRL</td><td>SystemVerilog · UVM · constrained-random · functional coverage · assertions</td><td class="acc rw">RW</td></tr>
+          <tr><td>0x04</td><td>RTL_DESIGN</td><td>Verilog · VHDL · FPGA (Intel/Altera) · Quartus · timing closure basics</td><td class="acc rw">RW</td></tr>
+          <tr><td>0x08</td><td>EDA_TOOLS</td><td>QuestaSim · Cadence · Synopsys · GTKWave · TCL automation</td><td class="acc rw">RW</td></tr>
+          <tr><td>0x0C</td><td>SW_CORE</td><td>Python · C/C++ · Bash · Java · JavaScript · TxL</td><td class="acc rw">RW</td></tr>
+          <tr><td>0x10</td><td>EMBEDDED</td><td>RPi 4 · Pico · ESP32 · Arduino · MicroPython · sensors · MicroC/OS-II RTOS</td><td class="acc rw">RW</td></tr>
+          <tr><td>0x14</td><td>LOW_LEVEL</td><td>ARM + RISC-V assembly · xv6 kernel work · Linux internals · Git</td><td class="acc rw">RW</td></tr>
+          <tr><td>0x18</td><td>LEARNING</td><td>Kotlin · Android (Jetpack Compose) · applied AI/ML</td><td class="acc wo">WIP</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ════════ 0x0C PROJECTS ════════ -->
+  <section id="projects" class="section">
+    <h2 class="sec-head"><span class="sec-addr">0x0C</span> PROJECTS</h2>
+    <p class="sec-sub">Featured builds. Full regression suite of public repos loads live from GitHub below.</p>
+
+    <div class="proj-grid">
+      <article class="proj">
+        <header><span class="proj-status pass">PASS</span><h3>nest_hub_on_LCD</h3></header>
+        <p>Google-Nest-Hub-style smart display built from scratch on a Raspberry Pi 4 with an LCD — Python-driven UI, system integration, and peripheral control on real hardware.</p>
+        <footer><span class="tag">Python</span><span class="tag">RPi4</span><a href="https://github.com/nandish-jha/nest_hub_on_LCD" target="_blank" rel="noopener">src →</a></footer>
+      </article>
+
+      <article class="proj">
+        <header><span class="proj-status pass">PASS</span><h3>electronic_card_lock</h3></header>
+        <p>Automatic door access system on Raspberry Pi 4 — card-based authentication driving physical lock hardware, with TCL and Python handling control flow.</p>
+        <footer><span class="tag">Python</span><span class="tag">TCL</span><span class="tag">RPi4</span><a href="https://github.com/nandish-jha/electronic_card_lock" target="_blank" rel="noopener">src →</a></footer>
+      </article>
+
+      <article class="proj">
+        <header><span class="proj-status pass">PASS</span><h3>ucosii_binary_game_hal</h3></header>
+        <p>Binary arithmetic game written in C on the MicroC/OS-II RTOS with a custom HAL — task scheduling, real-time constraints, and bare-metal I/O.</p>
+        <footer><span class="tag">C</span><span class="tag">RTOS</span><span class="tag">HAL</span><a href="https://github.com/nandish-jha/ucosii_binary_game_hal" target="_blank" rel="noopener">src →</a></footer>
+      </article>
+
+      <article class="proj">
+        <header><span class="proj-status pass">PASS</span><h3>discord_light_chat_web_app</h3></header>
+        <p>"Discord Lite" — a real-time web socializing platform built in JavaScript and containerized with Docker for reproducible deployment.</p>
+        <footer><span class="tag">JavaScript</span><span class="tag">Docker</span><a href="https://github.com/nandish-jha/discord_light_chat_web_app" target="_blank" rel="noopener">src →</a></footer>
+      </article>
+
+      <article class="proj">
+        <header><span class="proj-status pass">PASS</span><h3>space-booker</h3></header>
+        <p>Campus table booking system in Java/JavaFX — full desktop application with booking logic, UI, and persistent state.</p>
+        <footer><span class="tag">Java</span><span class="tag">JavaFX</span><a href="https://github.com/nandish-jha/space-booker" target="_blank" rel="noopener">src →</a></footer>
+      </article>
+
+      <article class="proj">
+        <header><span class="proj-status priv">PRIVATE</span><h3>ProDash</h3></header>
+        <p>Native Android productivity app in Kotlin + Jetpack Compose — AMOLED Material 3 design covering tasks, habits, budget, supplements, notes, goals, and workouts.</p>
+        <footer><span class="tag">Kotlin</span><span class="tag">Compose</span><span class="tag">Android</span><span class="muted">private repo</span></footer>
+      </article>
+    </div>
+
+    <h3 class="sub-head">// full regression — live from GitHub</h3>
+    <div class="repo-grid" id="repoGrid">
+      <p class="muted" id="repoStatus">$ fetching github.com/nandish-jha ...</p>
+    </div>
+  </section>
+
+  <!-- ════════ 0x10 RESUME ════════ -->
+  <section id="resume" class="section">
+    <h2 class="sec-head"><span class="sec-addr">0x10</span> RESUME</h2>
+    <div class="resume-row">
+      <div>
+        <p>One page. LaTeX-typeset. Tailored variants exist for DV/ASIC, DFT, embedded, and software roles — ask for the one that fits your req.</p>
+      </div>
+      <a class="btn btn-primary" href="assets/Nandish_Jha_Resume.pdf" download>cat resume.pdf →</a>
+    </div>
+  </section>
+
+  <!-- ════════ 0x14 BEYOND ════════ -->
+  <section id="beyond" class="section">
+    <h2 class="sec-head"><span class="sec-addr">0x14</span> BEYOND THE LAB</h2>
+    <div class="beyond-grid">
+      <div class="beyond-card">
+        <h3>cars.exe</h3>
+        <p>Porsche obsessive. Flat-six over everything. If it has a tachometer, I have an opinion.</p>
+      </div>
+      <div class="beyond-card">
+        <h3>iron.sh</h3>
+        <p>Six days a week under a barbell — push/pull/legs hybrid split. Discipline compiles.</p>
+      </div>
+      <div class="beyond-card">
+        <h3>markets.py</h3>
+        <p>Self-taught investor learning options the slow, correct way. Risk gets managed, not ignored.</p>
+      </div>
+      <div class="beyond-card">
+        <h3>da_minimal_guy</h3>
+        <p>Minimalism as an operating system — fewer things, better things. The feed lives on Instagram.</p>
+        <a href="https://www.instagram.com/da_minimal_guy/" target="_blank" rel="noopener">@da_minimal_guy →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ 0x18 CONTACT ════════ -->
+  <section id="contact" class="section">
+    <h2 class="sec-head"><span class="sec-addr">0x18</span> CONTACT</h2>
+    <p class="contact-line">tx_en asserted. Channels below — I respond fast.</p>
+    <ul class="contact-list">
+      <li><span class="sig-addr">[0]</span><a id="emailLink" href="#">email</a></li>
+      <li><span class="sig-addr">[1]</span><a href="https://www.linkedin.com/in/nandish-jha/" target="_blank" rel="noopener">linkedin.com/in/nandish-jha</a></li>
+      <li><span class="sig-addr">[2]</span><a href="https://github.com/nandish-jha" target="_blank" rel="noopener">github.com/nandish-jha</a></li>
+      <li><span class="sig-addr">[3]</span><a href="https://linktr.ee/nandish_jha" target="_blank" rel="noopener">linktr.ee/nandish_jha</a></li>
+      <li><span class="sig-addr">[4]</span><a href="https://www.instagram.com/da_minimal_guy/" target="_blank" rel="noopener">instagram.com/da_minimal_guy</a></li>
+    </ul>
+    <footer class="site-foot">
+      <span>© <span id="year"></span> Nandish Jha</span>
+      <span class="muted">// $finish called at end of simulation. 0 errors, 0 warnings.</span>
+    </footer>
+  </section>
+
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>
