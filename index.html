@@ -3,482 +3,265 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Nandish Jha — Hardware Verification Engineer</title>
-<meta name="description" content="Nandish Jha — Computer Engineering graduate and CS student specializing in hardware verification: SystemVerilog, UVM, FPGA, embedded systems." />
-<meta property="og:title" content="Nandish Jha — Hardware Verification Engineer" />
-<meta property="og:description" content="SystemVerilog · UVM · FPGA · Embedded. Projects, skills, resume." />
+<title>Nandish Jha — Hardware & Software Engineer</title>
+<meta name="description" content="Nandish Jha — Computer Engineering graduate and CS student building across hardware and software: SystemVerilog, UVM, FPGA, embedded, full-stack, and Android." />
+<meta property="og:title" content="Nandish Jha — Hardware & Software Engineer" />
+<meta property="og:description" content="Hardware · Software · Embedded · Systems. Projects, skills, resume." />
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/135614831?v=4" />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>▮</text></svg>" />
-
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
+<div class="stage-bg" aria-hidden="true">
+  <div class="stage-void"></div>
+  <div class="stage-bloom stage-bloom-a"></div>
+  <div class="stage-bloom stage-bloom-b"></div>
+  <div class="stage-fog"></div>
+  <div class="stage-vignette"></div>
+</div>
+<div class="grain" aria-hidden="true"></div>
+<canvas id="scene3d" aria-hidden="true"></canvas>
 
-<!-- Top App Bar -->
-<header class="top-bar" id="topBar">
-  <div class="top-bar-inner">
-    <span class="top-bar-title">NJ</span>
-    <nav class="top-nav" id="topNav">
-      <a href="#hero" class="nav-chip active" data-section="hero">Home</a>
-      <a href="#about" class="nav-chip" data-section="about">About</a>
-      <a href="#skills" class="nav-chip" data-section="skills">Skills</a>
-      <a href="#projects" class="nav-chip" data-section="projects">Projects</a>
-      <a href="#resume" class="nav-chip" data-section="resume">Resume</a>
-      <a href="#beyond" class="nav-chip" data-section="beyond">Life</a>
-      <a href="#contact" class="nav-chip" data-section="contact">Contact</a>
-    </nav>
-    <button class="icon-btn nav-toggle" id="navToggle" aria-label="Menu">
-      <span class="material-symbols-rounded">menu</span>
-    </button>
-  </div>
+<header class="nav">
+  <a class="nav-mark" href="#intro">NJ</a>
+  <nav class="nav-links">
+    <a href="#story">Story</a>
+    <a href="#craft">Craft</a>
+    <a href="#work">Work</a>
+    <a href="#life">Life</a>
+    <a href="#connect">Connect</a>
+  </nav>
+  <a class="nav-cta" href="assets/Nandish_Jha_Resume.pdf" target="_blank" rel="noopener">Resume</a>
 </header>
 
-<!-- Mobile nav drawer -->
-<div class="nav-scrim" id="navScrim"></div>
-<aside class="nav-drawer" id="navDrawer">
-  <div class="drawer-header">
-    <span class="drawer-title">Navigation</span>
-    <button class="icon-btn" id="drawerClose" aria-label="Close menu">
-      <span class="material-symbols-rounded">close</span>
-    </button>
-  </div>
-  <nav class="drawer-links">
-    <a href="#hero" class="drawer-link active"><span class="material-symbols-rounded">home</span>Home</a>
-    <a href="#about" class="drawer-link"><span class="material-symbols-rounded">person</span>About</a>
-    <a href="#skills" class="drawer-link"><span class="material-symbols-rounded">code</span>Skills</a>
-    <a href="#projects" class="drawer-link"><span class="material-symbols-rounded">folder_open</span>Projects</a>
-    <a href="#resume" class="drawer-link"><span class="material-symbols-rounded">description</span>Resume</a>
-    <a href="#beyond" class="drawer-link"><span class="material-symbols-rounded">interests</span>Life</a>
-    <a href="#contact" class="drawer-link"><span class="material-symbols-rounded">mail</span>Contact</a>
-  </nav>
-</aside>
-
 <main>
-
-  <!-- Hero -->
-  <section id="hero" class="section hero-section">
-    <div class="hero-content">
-      <h1 class="hero-name">Nandish<br/>Jha</h1>
-      <div class="hero-chips">
-        <span class="chip chip-filled">Will Relocate</span>
-        <span class="chip chip-filled">Canadian Citizen</span>
+  <!-- INTRO -->
+  <section id="intro" class="panel intro">
+    <div class="intro-copy">
+      <p class="eyebrow reveal">Hardware · Software · Embedded · Systems</p>
+      <h1 class="display reveal">
+        <span class="line"><span class="line-inner">Nandish</span></span>
+        <span class="line"><span class="line-inner italic">Jha</span></span>
+      </h1>
+      <p class="lede reveal">Equal parts silicon and software — verification, embedded builds, and full-stack products that ship.</p>
+      <div class="intro-actions reveal">
+        <a class="btn btn-solid" href="#work">View Projects</a>
+        <a class="btn btn-ghost" href="https://linktr.ee/nandish_jha" target="_blank" rel="noopener">View Blog</a>
+        <a class="btn btn-ghost" href="#connect">Get in Touch</a>
       </div>
-      <div class="hero-actions">
-        <a class="m3-btn m3-btn-filled" href="#projects">
-          <span class="material-symbols-rounded">rocket_launch</span>
-          View Projects
-        </a>
-        <a class="m3-btn m3-btn-tonal" href="https://linktr.ee/nandish_jha" target="_blank" rel="noopener">
-          <span class="material-symbols-rounded">article</span>
-          View Blog
-        </a>
-        <a class="m3-btn m3-btn-outlined" href="#contact">
-          <span class="material-symbols-rounded">waving_hand</span>
-          Get in Touch
-        </a>
+      <div class="meta-row reveal">
+        <span>Will Relocate</span>
+        <span class="dot"></span>
+        <span>Canadian Citizen</span>
       </div>
+    </div>
+    <div class="scroll-hint reveal">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
     </div>
   </section>
 
-  <!-- About -->
-  <section id="about" class="section">
-    <div class="section-header">
-      <span class="material-symbols-rounded section-icon">person</span>
-      <h2>About</h2>
+  <!-- STORY -->
+  <section id="story" class="panel story">
+    <div class="story-sticky">
+      <h2 class="section-display">
+        <span class="reveal">Hardware</span>
+        <span class="reveal italic">&amp; software.</span>
+        <span class="reveal">Same engineer,</span>
+        <span class="reveal italic">both sides.</span>
+      </h2>
     </div>
-    <div class="about-layout">
-      <div class="about-text surface-card">
-        <p>I work the full stack of computing — from gates to dashboards. Computer Engineering graduate <strong>(B.Sc., University of Saskatchewan, 2024)</strong>, now completing a second B.Sc. in Computer Science — Computer Systems specialization (expected Apr 2027).</p>
-        <p>One week it's a <span class="text-primary">UVM</span> testbench in <span class="text-primary">SystemVerilog</span> and RTL on Intel/Altera FPGAs. The next it's a Raspberry Pi or ESP32 build, a <span class="text-primary">Python</span> data pipeline, a full-stack web app in JavaScript and Docker, or an Android app in <span class="text-primary">Kotlin</span>. The layer changes; the engineering doesn't.</p>
-        <p>Lately that range extends into <span class="text-primary">AI/ML</span> and analytics — building data dashboards, integrating LLMs into real workflows, and turning raw telemetry into decisions. Hardware taught me to debug at the signal level; software taught me to ship. I use both.</p>
-      </div>
-      <div class="about-details">
-        <div class="detail-card surface-card">
-          <span class="material-symbols-rounded detail-icon">school</span>
-          <div>
-            <div class="detail-label">Education</div>
-            <div class="detail-value">B.Sc. Computer Engineering, USask '24</div>
-            <div class="detail-value">B.Sc. Computer Science (Systems), '27</div>
-          </div>
-        </div>
-        <div class="detail-card surface-card">
-          <span class="material-symbols-rounded detail-icon">target</span>
-          <div>
-            <div class="detail-label">Targeting</div>
-            <div class="detail-value">DV · ASIC · DFT · Embedded</div>
-          </div>
-        </div>
-        <div class="detail-card surface-card">
-          <span class="material-symbols-rounded detail-icon">public</span>
-          <div>
-            <div class="detail-label">Location</div>
-            <div class="detail-value">Canada + USA · remote-ready</div>
-          </div>
-        </div>
-        <div class="detail-card surface-card status-card">
-          <span class="material-symbols-rounded detail-icon">work</span>
-          <div>
-            <div class="detail-label">Status</div>
-            <div class="detail-value text-primary">Seeking FT / Co-op / Intern</div>
-          </div>
-        </div>
-      </div>
+    <div class="story-rail">
+      <article class="story-card tilt" data-depth="0.4">
+        <span class="card-num">01</span>
+        <h3>About</h3>
+        <p>Computer Engineering graduate (B.Sc., University of Saskatchewan, 2024), now completing a second B.Sc. in Computer Science, USask '26. I work across hardware and software with equal weight — not one as a side quest for the other.</p>
+        <p>One week it's a UVM testbench in SystemVerilog and RTL on Intel/Altera FPGAs. The next it's a Python data pipeline, a Dockerized web app, a Kotlin Android product, or a Raspberry Pi / ESP32 build. Gates and GUIs. Signals and ship dates.</p>
+      </article>
+      <article class="story-card tilt" data-depth="0.55">
+        <span class="card-num">02</span>
+        <h3>Focus</h3>
+        <ul class="focus-list">
+          <li><em>Target</em> Hardware · Software · Embedded · Systems</li>
+          <li><em>Geo</em> Canada + USA · remote-ready</li>
+          <li><em>Status</em> Seeking FT / Co-op / Intern</li>
+        </ul>
+      </article>
+      <article class="story-card tilt" data-depth="0.7">
+        <span class="card-num">03</span>
+        <h3>Education</h3>
+        <p>B.Sc. Computer Engineering, USask '24</p>
+        <p>B.Sc. Computer Science, USask '26</p>
+      </article>
     </div>
   </section>
 
-  <!-- Skills -->
-  <section id="skills" class="section">
-    <div class="section-header">
-      <span class="material-symbols-rounded section-icon">code</span>
-      <h2>Skills</h2>
+  <!-- CRAFT / SKILLS -->
+  <section id="craft" class="panel craft">
+    <div class="panel-head">
+      <p class="eyebrow reveal">Skill register</p>
+      <h2 class="section-display reveal">What I build with</h2>
     </div>
-    <div class="skills-grid">
-      <div class="skill-card surface-card">
-        <div class="skill-header">
-          <span class="material-symbols-rounded skill-icon">bug_report</span>
-          <h3>Verification</h3>
-        </div>
-        <div class="skill-tags">
-          <span class="chip">SystemVerilog</span>
-          <span class="chip">UVM</span>
-          <span class="chip">Constrained-Random</span>
-          <span class="chip">Functional Coverage</span>
-          <span class="chip">Assertions</span>
-        </div>
-      </div>
-      <div class="skill-card surface-card">
-        <div class="skill-header">
-          <span class="material-symbols-rounded skill-icon">memory</span>
-          <h3>RTL Design</h3>
-        </div>
-        <div class="skill-tags">
-          <span class="chip">Verilog</span>
-          <span class="chip">VHDL</span>
-          <span class="chip">FPGA (Intel/Altera)</span>
-          <span class="chip">Quartus</span>
-          <span class="chip">Timing Closure</span>
-        </div>
-      </div>
-      <div class="skill-card surface-card">
-        <div class="skill-header">
-          <span class="material-symbols-rounded skill-icon">build</span>
-          <h3>EDA Tools</h3>
-        </div>
-        <div class="skill-tags">
-          <span class="chip">QuestaSim</span>
-          <span class="chip">Cadence</span>
-          <span class="chip">Synopsys</span>
-          <span class="chip">GTKWave</span>
-          <span class="chip">TCL Automation</span>
-        </div>
-      </div>
-      <div class="skill-card surface-card">
-        <div class="skill-header">
-          <span class="material-symbols-rounded skill-icon">terminal</span>
-          <h3>Software</h3>
-        </div>
-        <div class="skill-tags">
-          <span class="chip">Python</span>
-          <span class="chip">C/C++</span>
-          <span class="chip">Bash</span>
-          <span class="chip">Java</span>
-          <span class="chip">JavaScript</span>
-          <span class="chip">TxL</span>
-        </div>
-      </div>
-      <div class="skill-card surface-card">
-        <div class="skill-header">
-          <span class="material-symbols-rounded skill-icon">developer_board</span>
-          <h3>Embedded</h3>
-        </div>
-        <div class="skill-tags">
-          <span class="chip">RPi 4</span>
-          <span class="chip">Pico</span>
-          <span class="chip">ESP32</span>
-          <span class="chip">Arduino</span>
-          <span class="chip">MicroPython</span>
-          <span class="chip">MicroC/OS-II RTOS</span>
-        </div>
-      </div>
-      <div class="skill-card surface-card">
-        <div class="skill-header">
-          <span class="material-symbols-rounded skill-icon">layers</span>
-          <h3>Low-Level</h3>
-        </div>
-        <div class="skill-tags">
-          <span class="chip">ARM Assembly</span>
-          <span class="chip">RISC-V Assembly</span>
-          <span class="chip">xv6 Kernel</span>
-          <span class="chip">Linux Internals</span>
-          <span class="chip">Git</span>
-        </div>
-      </div>
-      <div class="skill-card surface-card learning-card">
-        <div class="skill-header">
-          <span class="material-symbols-rounded skill-icon">school</span>
-          <h3>Currently Learning</h3>
-          <span class="chip chip-accent">WIP</span>
-        </div>
-        <div class="skill-tags">
-          <span class="chip">Kotlin</span>
-          <span class="chip">Android (Jetpack Compose)</span>
-          <span class="chip">Applied AI/ML</span>
-        </div>
-      </div>
+    <div class="craft-grid">
+      <article class="craft-card tilt" data-depth="0.5">
+        <h3>Verification</h3>
+        <p>SystemVerilog · UVM · constrained-random · coverage · assertions</p>
+      </article>
+      <article class="craft-card tilt" data-depth="0.6">
+        <h3>RTL Design</h3>
+        <p>Verilog · VHDL · FPGA · Quartus · timing closure</p>
+      </article>
+      <article class="craft-card tilt" data-depth="0.45">
+        <h3>EDA Tools</h3>
+        <p>QuestaSim · Cadence · Synopsys · GTKWave · TCL</p>
+      </article>
+      <article class="craft-card tilt" data-depth="0.55">
+        <h3>Software</h3>
+        <p>Python · C/C++ · Bash · Java · JavaScript · TxL</p>
+      </article>
+      <article class="craft-card tilt" data-depth="0.65">
+        <h3>Embedded</h3>
+        <p>RPi · Pico · ESP32 · Arduino · MicroPython · RTOS</p>
+      </article>
+      <article class="craft-card tilt" data-depth="0.5">
+        <h3>Low-Level</h3>
+        <p>ARM · RISC-V · xv6 · Linux internals · Git</p>
+      </article>
     </div>
   </section>
 
-  <!-- Projects -->
-  <section id="projects" class="section">
-    <div class="section-header">
-      <span class="material-symbols-rounded section-icon">folder_open</span>
-      <h2>Projects</h2>
+  <!-- WORK -->
+  <section id="work" class="panel work">
+    <div class="panel-head">
+      <p class="eyebrow reveal">Selected builds</p>
+      <h2 class="section-display reveal">Projects</h2>
     </div>
-    <p class="section-subtitle">Featured builds. More repos load live from GitHub below.</p>
-
-    <div class="proj-grid">
-      <article class="proj-card surface-card">
-        <div class="proj-top">
-          <span class="material-symbols-rounded proj-icon">smart_display</span>
-          <h3>Nest Hub on LCD</h3>
-        </div>
-        <p>Google-Nest-Hub-style smart display built from scratch on a Raspberry Pi 4 with an LCD — Python-driven UI, system integration, and peripheral control on real hardware.</p>
-        <div class="proj-footer">
-          <div class="proj-tags"><span class="chip">Python</span><span class="chip">RPi4</span></div>
-          <a class="m3-btn m3-btn-text" href="https://github.com/nandish-jha/nest_hub_on_LCD" target="_blank" rel="noopener">
-            Source <span class="material-symbols-rounded">open_in_new</span>
-          </a>
-        </div>
-      </article>
-
-      <article class="proj-card surface-card">
-        <div class="proj-top">
-          <span class="material-symbols-rounded proj-icon">lock</span>
-          <h3>Electronic Card Lock</h3>
-        </div>
-        <p>Automatic door access system on Raspberry Pi 4 — card-based authentication driving physical lock hardware, with TCL and Python handling control flow.</p>
-        <div class="proj-footer">
-          <div class="proj-tags"><span class="chip">Python</span><span class="chip">TCL</span><span class="chip">RPi4</span></div>
-          <a class="m3-btn m3-btn-text" href="https://github.com/nandish-jha/electronic_card_lock" target="_blank" rel="noopener">
-            Source <span class="material-symbols-rounded">open_in_new</span>
-          </a>
-        </div>
-      </article>
-
-      <article class="proj-card surface-card">
-        <div class="proj-top">
-          <span class="material-symbols-rounded proj-icon">sports_esports</span>
-          <h3>UCOS-II Binary Game</h3>
-        </div>
-        <p>Binary arithmetic game written in C on the MicroC/OS-II RTOS with a custom HAL — task scheduling, real-time constraints, and bare-metal I/O.</p>
-        <div class="proj-footer">
-          <div class="proj-tags"><span class="chip">C</span><span class="chip">RTOS</span><span class="chip">HAL</span></div>
-          <a class="m3-btn m3-btn-text" href="https://github.com/nandish-jha/ucosii_binary_game_hal" target="_blank" rel="noopener">
-            Source <span class="material-symbols-rounded">open_in_new</span>
-          </a>
-        </div>
-      </article>
-
-      <article class="proj-card surface-card">
-        <div class="proj-top">
-          <span class="material-symbols-rounded proj-icon">chat</span>
-          <h3>Discord Light</h3>
-        </div>
-        <p>"Discord Lite" — a real-time web socializing platform built in JavaScript and containerized with Docker for reproducible deployment.</p>
-        <div class="proj-footer">
-          <div class="proj-tags"><span class="chip">JavaScript</span><span class="chip">Docker</span></div>
-          <a class="m3-btn m3-btn-text" href="https://github.com/nandish-jha/discord_light_chat_web_app" target="_blank" rel="noopener">
-            Source <span class="material-symbols-rounded">open_in_new</span>
-          </a>
-        </div>
-      </article>
-
-      <article class="proj-card surface-card">
-        <div class="proj-top">
-          <span class="material-symbols-rounded proj-icon">event_seat</span>
-          <h3>Space Booker</h3>
-        </div>
-        <p>Campus table booking system in Java/JavaFX — full desktop application with booking logic, UI, and persistent state.</p>
-        <div class="proj-footer">
-          <div class="proj-tags"><span class="chip">Java</span><span class="chip">JavaFX</span></div>
-          <a class="m3-btn m3-btn-text" href="https://github.com/nandish-jha/space-booker" target="_blank" rel="noopener">
-            Source <span class="material-symbols-rounded">open_in_new</span>
-          </a>
-        </div>
-      </article>
-
-      <article class="proj-card surface-card">
-        <div class="proj-top">
-          <span class="material-symbols-rounded proj-icon">phone_android</span>
-          <h3>ProDash</h3>
-        </div>
-        <p>Minimal AMOLED personal productivity dashboard — tasks, habits, budget, supplements, notes, goals, and workouts. PWA + Android APK.</p>
-        <div class="proj-footer">
-          <div class="proj-tags"><span class="chip">Kotlin</span><span class="chip">Compose</span><span class="chip">Android</span></div>
-          <a class="m3-btn m3-btn-text" href="https://github.com/nandish-jha/boop-app" target="_blank" rel="noopener">
-            Source <span class="material-symbols-rounded">open_in_new</span>
-          </a>
-        </div>
-      </article>
-
-      <article class="proj-card surface-card">
-        <div class="proj-top">
-          <span class="material-symbols-rounded proj-icon">swap_horiz</span>
+    <div class="work-list">
+      <a class="work-item tilt" data-depth="0.35" href="https://github.com/nandish-jha/xswitch-verification" target="_blank" rel="noopener">
+        <span class="work-idx">01</span>
+        <div class="work-body">
           <h3>Xswitch Verification</h3>
+          <p>UVM testbench for an Xswitch — constrained-random, coverage, assertions.</p>
         </div>
-        <p>UVM-based testbench for an Xswitch — constrained-random stimulus, functional coverage, and assertion-based verification in SystemVerilog.</p>
-        <div class="proj-footer">
-          <div class="proj-tags"><span class="chip">SystemVerilog</span><span class="chip">UVM</span></div>
-          <a class="m3-btn m3-btn-text" href="https://github.com/nandish-jha/xswitch-verification" target="_blank" rel="noopener">
-            Source <span class="material-symbols-rounded">open_in_new</span>
-          </a>
-        </div>
-      </article>
-
-      <article class="proj-card surface-card">
-        <div class="proj-top">
-          <span class="material-symbols-rounded proj-icon">memory</span>
+        <span class="work-tags">SystemVerilog · UVM</span>
+      </a>
+      <a class="work-item tilt" data-depth="0.4" href="https://github.com/nandish-jha/full_microprocessor" target="_blank" rel="noopener">
+        <span class="work-idx">02</span>
+        <div class="work-body">
           <h3>Full Microprocessor</h3>
+          <p>4-bit software-based MPU designed in Verilog and synthesized on FPGA.</p>
         </div>
-        <p>4-bit software-based microprocessor unit designed in Verilog and synthesized on FPGA.</p>
-        <div class="proj-footer">
-          <div class="proj-tags"><span class="chip">Verilog</span><span class="chip">FPGA</span></div>
-          <a class="m3-btn m3-btn-text" href="https://github.com/nandish-jha/full_microprocessor" target="_blank" rel="noopener">
-            Source <span class="material-symbols-rounded">open_in_new</span>
-          </a>
+        <span class="work-tags">Verilog · FPGA</span>
+      </a>
+      <a class="work-item tilt" data-depth="0.45" href="https://github.com/nandish-jha/nest_hub_on_LCD" target="_blank" rel="noopener">
+        <span class="work-idx">03</span>
+        <div class="work-body">
+          <h3>Nest Hub on LCD</h3>
+          <p>Smart display on Raspberry Pi 4 — Python UI, peripherals, real hardware.</p>
         </div>
-      </article>
-
-      <article class="proj-card surface-card">
-        <div class="proj-top">
-          <span class="material-symbols-rounded proj-icon">search</span>
+        <span class="work-tags">Python · RPi4</span>
+      </a>
+      <a class="work-item tilt" data-depth="0.5" href="https://github.com/nandish-jha/boop-app" target="_blank" rel="noopener">
+        <span class="work-idx">04</span>
+        <div class="work-body">
+          <h3>ProDash</h3>
+          <p>AMOLED productivity dashboard — PWA + Android APK.</p>
+        </div>
+        <span class="work-tags">Kotlin · Compose</span>
+      </a>
+      <a class="work-item tilt" data-depth="0.4" href="https://github.com/nandish-jha/discord_light_chat_web_app" target="_blank" rel="noopener">
+        <span class="work-idx">05</span>
+        <div class="work-body">
+          <h3>Discord Light</h3>
+          <p>Real-time web socializing platform, containerized with Docker.</p>
+        </div>
+        <span class="work-tags">JavaScript · Docker</span>
+      </a>
+      <a class="work-item tilt" data-depth="0.45" href="https://github.com/nandish-jha/LogLens" target="_blank" rel="noopener">
+        <span class="work-idx">06</span>
+        <div class="work-body">
           <h3>LogLens</h3>
+          <p>Structured log file parser built in Perl.</p>
         </div>
-        <p>A log file parser built in Perl for structured analysis and extraction of log data.</p>
-        <div class="proj-footer">
-          <div class="proj-tags"><span class="chip">Perl</span></div>
-          <a class="m3-btn m3-btn-text" href="https://github.com/nandish-jha/LogLens" target="_blank" rel="noopener">
-            Source <span class="material-symbols-rounded">open_in_new</span>
-          </a>
-        </div>
-      </article>
-    </div>
-
-    <h3 class="subsection-title">
-      <span class="material-symbols-rounded">cloud_download</span>
-      Live from GitHub
-    </h3>
-    <div class="repo-grid" id="repoGrid">
-      <p class="text-muted" id="repoStatus">Fetching repositories...</p>
-    </div>
-  </section>
-
-  <!-- Resume -->
-  <section id="resume" class="section">
-    <div class="section-header">
-      <span class="material-symbols-rounded section-icon">description</span>
-      <h2>Resume</h2>
-    </div>
-    <div class="resume-card surface-card">
-      <div class="resume-info">
-        <span class="material-symbols-rounded resume-icon">picture_as_pdf</span>
-        <div>
-          <h3>One page. LaTeX-typeset.</h3>
-          <p>Tailored variants exist for DV/ASIC, DFT, embedded, and software roles — ask for the one that fits your req.</p>
-        </div>
-      </div>
-      <a class="m3-btn m3-btn-filled" href="assets/Nandish_Jha_Resume.pdf" target="_blank" rel="noopener">
-        <span class="material-symbols-rounded">download</span>
-        Download Resume
+        <span class="work-tags">Perl</span>
       </a>
     </div>
   </section>
 
-  <!-- Beyond the Lab -->
-  <section id="beyond" class="section">
-    <div class="section-header">
-      <span class="material-symbols-rounded section-icon">interests</span>
-      <h2>Beyond the Lab</h2>
+  <!-- LIFE -->
+  <section id="life" class="panel life">
+    <div class="panel-head">
+      <p class="eyebrow reveal">Beyond the lab</p>
+      <h2 class="section-display reveal">Off the clock</h2>
     </div>
-    <div class="beyond-grid">
-      <div class="beyond-card surface-card">
-        <span class="material-symbols-rounded beyond-icon">fitness_center</span>
+    <div class="life-grid">
+      <article class="life-card tilt" data-depth="0.5">
         <h3>iron.sh</h3>
-        <p>Six days a week under a barbell — push/pull/legs hybrid split. Discipline compiles.</p>
-      </div>
-      <div class="beyond-card surface-card">
-        <span class="material-symbols-rounded beyond-icon">trending_up</span>
+        <p>Six days a week under a barbell — push/pull/legs hybrid. Discipline compiles.</p>
+      </article>
+      <article class="life-card tilt" data-depth="0.6">
         <h3>markets.py</h3>
-        <p>Self-taught investor learning options the slow, correct way. Risk gets managed, not ignored.</p>
-      </div>
-      <div class="beyond-card surface-card">
-        <span class="material-symbols-rounded beyond-icon">photo_camera</span>
+        <p>Self-taught investor learning options the slow, correct way.</p>
+      </article>
+      <article class="life-card tilt" data-depth="0.55">
         <h3>Unsplash</h3>
-        <p>Street, minimal, and architectural photography — shared freely on Unsplash.</p>
-        <a class="m3-btn m3-btn-text" href="https://unsplash.com/@da_minimal_guy" target="_blank" rel="noopener">
-          @da_minimal_guy <span class="material-symbols-rounded">open_in_new</span>
-        </a>
-      </div>
-      <div class="beyond-card surface-card">
-        <span class="material-symbols-rounded beyond-icon">self_improvement</span>
+        <p>Street, minimal, and architectural photography.</p>
+        <a href="https://unsplash.com/@da_minimal_guy" target="_blank" rel="noopener">@da_minimal_guy →</a>
+      </article>
+      <article class="life-card tilt" data-depth="0.45">
         <h3>da_minimal_guy</h3>
         <p>Minimalism as an operating system — fewer things, better things.</p>
-        <a class="m3-btn m3-btn-text" href="https://www.instagram.com/da_minimal_guy/" target="_blank" rel="noopener">
-          @da_minimal_guy <span class="material-symbols-rounded">open_in_new</span>
+        <a href="https://www.instagram.com/da_minimal_guy/" target="_blank" rel="noopener">Instagram →</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- CONNECT -->
+  <section id="connect" class="panel connect">
+    <div class="connect-inner">
+      <p class="eyebrow reveal">Channels</p>
+      <h2 class="section-display reveal">Let's talk</h2>
+      <div class="connect-list">
+        <a class="connect-link tilt" data-depth="0.3" id="emailLink" href="#">
+          <span>Email</span>
+          <span class="connect-arrow">→</span>
+        </a>
+        <a class="connect-link tilt" data-depth="0.35" href="https://www.linkedin.com/in/nandish-jha/" target="_blank" rel="noopener">
+          <span>LinkedIn</span>
+          <span class="connect-arrow">→</span>
+        </a>
+        <a class="connect-link tilt" data-depth="0.4" href="https://github.com/nandish-jha" target="_blank" rel="noopener">
+          <span>GitHub</span>
+          <span class="connect-arrow">→</span>
+        </a>
+        <a class="connect-link tilt" data-depth="0.45" href="https://linktr.ee/nandish_jha" target="_blank" rel="noopener">
+          <span>Linktree</span>
+          <span class="connect-arrow">→</span>
+        </a>
+        <a class="connect-link tilt" data-depth="0.5" href="https://www.instagram.com/da_minimal_guy/" target="_blank" rel="noopener">
+          <span>Instagram</span>
+          <span class="connect-arrow">→</span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" class="section">
-    <div class="section-header">
-      <span class="material-symbols-rounded section-icon">mail</span>
-      <h2>Contact</h2>
-    </div>
-    <p class="section-subtitle">I respond fast. Pick your preferred channel.</p>
-    <div class="contact-grid">
-      <a id="emailLink" href="#" class="contact-card surface-card">
-        <span class="material-symbols-rounded contact-icon">email</span>
-        <div class="contact-text">
-          <span class="contact-label">Email</span>
-          <span class="contact-value" id="emailValue">email</span>
-        </div>
-      </a>
-      <a href="https://www.linkedin.com/in/nandish-jha/" target="_blank" rel="noopener" class="contact-card surface-card">
-        <span class="material-symbols-rounded contact-icon">work</span>
-        <div class="contact-text">
-          <span class="contact-label">LinkedIn</span>
-          <span class="contact-value">nandish-jha</span>
-        </div>
-      </a>
-      <a href="https://github.com/nandish-jha" target="_blank" rel="noopener" class="contact-card surface-card">
-        <span class="material-symbols-rounded contact-icon">code</span>
-        <div class="contact-text">
-          <span class="contact-label">GitHub</span>
-          <span class="contact-value">nandish-jha</span>
-        </div>
-      </a>
-      <a href="https://linktr.ee/nandish_jha" target="_blank" rel="noopener" class="contact-card surface-card">
-        <span class="material-symbols-rounded contact-icon">link</span>
-        <div class="contact-text">
-          <span class="contact-label">Linktree</span>
-          <span class="contact-value">nandish_jha</span>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <footer class="site-footer">
+  <footer class="site-foot">
     <span>© <span id="year"></span> Nandish Jha</span>
+    <span class="muted">Hardware · Software · Embedded · Systems</span>
   </footer>
-
 </main>
 
-<script src="js/main.js"></script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"
+  }
+}
+</script>
+<script type="module" src="js/main.js"></script>
 </body>
 </html>
