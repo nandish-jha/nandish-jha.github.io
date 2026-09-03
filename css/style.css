@@ -748,7 +748,7 @@ main { padding-top: 64px; }
 /* ─── CONTACT ─── */
 .contact-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 12px;
 }
 .contact-card {
@@ -783,10 +783,10 @@ main { padding-top: 64px; }
   min-width: 0;
 }
 .contact-label {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   color: var(--md-on-surface);
-  letter-spacing: .01em;
+  letter-spacing: -.01em;
 }
 .contact-value {
   font-size: 13px;
