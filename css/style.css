@@ -735,10 +735,11 @@ main { padding-top: 64px; }
 }
 .beyond-card h3 {
   font-family: var(--font-display);
-  font-size: 28px;
+  font-size: 36px;
   font-weight: 700;
   color: var(--md-on-surface);
-  letter-spacing: -.02em;
+  letter-spacing: -.03em;
+  line-height: 1.1;
 }
 .beyond-card p {
   font-size: 14px;
@@ -784,10 +785,11 @@ main { padding-top: 64px; }
   min-width: 0;
 }
 .contact-label {
-  font-size: 28px;
+  font-size: 36px;
   font-weight: 700;
   color: var(--md-on-surface);
-  letter-spacing: -.02em;
+  letter-spacing: -.03em;
+  line-height: 1.1;
 }
 .contact-value {
   font-size: 13px;
