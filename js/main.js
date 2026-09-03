@@ -89,7 +89,6 @@ if (!reducedMotion) {
     ...document.querySelectorAll(".detail-card"),
     ...document.querySelectorAll(".resume-card"),
     ...document.querySelectorAll(".hero-content"),
-    ...document.querySelectorAll(".hero-visual"),
   ];
   revealTargets.forEach((el) => el.classList.add("reveal"));
 
@@ -118,76 +117,6 @@ if (!reducedMotion) {
     revealObserver.observe(el)
   );
 }
-
-/* ── Hero waveform ── */
-(function drawWave() {
-  const svg = document.getElementById("waveSvg");
-  const W = 760, H = 190;
-  const NS = "http://www.w3.org/2000/svg";
-  const rows = [38, 95, 152];
-  const A = 16;
-  const X0 = 170;
-
-  const primary = "#D4A373";
-  const secondary = "#B8C49C";
-  const tertiary = "#C4A68C";
-  const muted = "#5C4F4B";
-
-  for (let x = X0; x < W; x += 48) {
-    const g = document.createElementNS(NS, "line");
-    g.setAttribute("x1", x); g.setAttribute("x2", x);
-    g.setAttribute("y1", 8); g.setAttribute("y2", H - 8);
-    g.setAttribute("stroke", muted);
-    g.setAttribute("stroke-opacity", "0.3");
-    svg.appendChild(g);
-  }
-
-  let d = `M ${X0} ${rows[0] + A}`;
-  for (let x = X0; x < W - 10; x += 40) {
-    d += ` H ${x + 20} V ${rows[0] - A} H ${x + 40} V ${rows[0] + A}`;
-  }
-  addPath(d, primary, 0);
-
-  d = `M ${X0} ${rows[1] + A} H ${X0 + 110} V ${rows[1] - A} H ${W - 10}`;
-  addPath(d, secondary, 300);
-
-  d = `M ${X0} ${rows[2]}`;
-  const seg = 142;
-  for (let x = X0; x < W - 30; x += seg) {
-    d += ` M ${x} ${rows[2] - A} H ${x + seg - 14} L ${x + seg} ${rows[2]} `
-       + ` M ${x} ${rows[2] + A} H ${x + seg - 14} L ${x + seg} ${rows[2]} `;
-  }
-  addPath(d, tertiary, 600);
-
-  const labels = ["CE_2024", "CS_2027", "DV_ROLE", "0xC0FFEE"];
-  labels.forEach((txt, i) => {
-    const t = document.createElementNS(NS, "text");
-    t.setAttribute("x", X0 + 16 + i * seg);
-    t.setAttribute("y", rows[2] + 4);
-    t.setAttribute("fill", muted);
-    t.setAttribute("font-size", "11");
-    t.setAttribute("font-family", "JetBrains Mono, monospace");
-    t.textContent = txt;
-    svg.appendChild(t);
-  });
-
-  function addPath(dStr, color, delay) {
-    const p = document.createElementNS(NS, "path");
-    p.setAttribute("d", dStr);
-    p.setAttribute("fill", "none");
-    p.setAttribute("stroke", color);
-    p.setAttribute("stroke-width", "2");
-    svg.appendChild(p);
-    if (reducedMotion) return;
-    const len = p.getTotalLength();
-    p.style.strokeDasharray = len;
-    p.style.strokeDashoffset = len;
-    p.style.transition = `stroke-dashoffset 1.8s cubic-bezier(0.2, 0, 0, 1) ${delay}ms`;
-    requestAnimationFrame(() =>
-      requestAnimationFrame(() => { p.style.strokeDashoffset = "0"; })
-    );
-  }
-})();
 
 /* ── Live GitHub repos ── */
 (async function loadRepos() {
