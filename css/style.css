@@ -578,7 +578,7 @@ main { padding-top: 64px; }
 /* ─── PROJECTS ─── */
 .proj-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
 }
 .proj-card {
