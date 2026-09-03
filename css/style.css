@@ -517,16 +517,16 @@ main { padding-top: 64px; }
   border-radius: var(--shape-md);
 }
 .detail-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--md-on-surface-var);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--md-on-surface);
   text-transform: uppercase;
-  letter-spacing: .06em;
+  letter-spacing: .04em;
   margin-bottom: 2px;
 }
 .detail-value {
   font-size: 14px;
-  color: var(--md-on-surface);
+  color: var(--md-on-surface-var);
   line-height: 1.45;
 }
 
@@ -559,8 +559,8 @@ main { padding-top: 64px; }
 }
 .skill-header h3 {
   font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 700;
   color: var(--md-on-surface);
 }
 .skill-header .chip-accent { margin-left: auto; }
@@ -607,8 +607,8 @@ main { padding-top: 64px; }
 }
 .proj-top h3 {
   font-family: var(--font-mono);
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 600;
   color: var(--md-on-surface);
   word-break: break-all;
 }
@@ -697,8 +697,8 @@ main { padding-top: 64px; }
 }
 .resume-info h3 {
   font-family: var(--font-display);
-  font-size: 17px;
-  font-weight: 600;
+  font-size: 22px;
+  font-weight: 700;
   margin-bottom: 4px;
   color: var(--md-on-surface);
 }
@@ -735,8 +735,8 @@ main { padding-top: 64px; }
 }
 .beyond-card h3 {
   font-family: var(--font-mono);
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 700;
   color: var(--md-on-surface);
 }
 .beyond-card p {
@@ -783,7 +783,7 @@ main { padding-top: 64px; }
   min-width: 0;
 }
 .contact-label {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--md-on-surface);
   letter-spacing: -.01em;
