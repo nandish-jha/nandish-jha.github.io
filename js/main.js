@@ -1,13 +1,11 @@
 /* ============================================================
    NANDISH JHA — PORTFOLIO  ·  js/main.js
+   Material You Dark · Terracotta
    ============================================================ */
 
-/* ─── EDIT ME ───────────────────────────────────────────────
-   One place for everything personal. Change values here only. */
 const CONFIG = {
-  email: "nandish.d.jha@gmail.com",          // <-- set your real email
+  email: "nandish.d.jha@gmail.com",
   githubUser: "nandish-jha",
-  // Repos already shown as featured cards — excluded from the live grid
   featured: [
     "nest_hub_on_LCD",
     "electronic_card_lock",
@@ -16,101 +14,153 @@ const CONFIG = {
     "space-booker",
   ],
 };
-/* ──────────────────────────────────────────────────────────── */
 
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/* ── footer year + email wiring ── */
+/* ── Basics ── */
 document.getElementById("year").textContent = new Date().getFullYear();
 const emailLink = document.getElementById("emailLink");
 emailLink.href = "mailto:" + CONFIG.email;
-emailLink.textContent = CONFIG.email;
+document.getElementById("emailValue").textContent = CONFIG.email;
 
-/* ── boot log typewriter ──
-   Mimics a QuestaSim/vsim session loading the page as a testbench. */
-const BOOT_LINES = [
-  { t: "$ vsim -voptargs=+acc work.portfolio_tb -do wave.do", c: "cmd" },
-  { t: "# Loading work.portfolio_tb", c: "" },
-  { t: "# UVM_INFO @ 0: reporter [RNTST] Running test portfolio_test...", c: "" },
-  { t: "# UVM_INFO @ 0: candidate [INIT] Nandish Jha :: DV / ASIC / Embedded — ready.", c: "ok" },
-];
+/* ── Top bar scroll effect ── */
+const topBar = document.getElementById("topBar");
+let lastScroll = 0;
+window.addEventListener("scroll", () => {
+  topBar.classList.toggle("scrolled", window.scrollY > 32);
+  lastScroll = window.scrollY;
+}, { passive: true });
 
-const bootEl = document.getElementById("bootLog");
+/* ── Mobile nav drawer ── */
+const navToggle = document.getElementById("navToggle");
+const navDrawer = document.getElementById("navDrawer");
+const navScrim = document.getElementById("navScrim");
+const drawerClose = document.getElementById("drawerClose");
 
-function renderBootInstant() {
-  bootEl.innerHTML = BOOT_LINES
-    .map((l) => `<span class="${l.c}">${l.t}</span>`)
-    .join("\n");
+function openDrawer() {
+  navDrawer.classList.add("open");
+  navScrim.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeDrawer() {
+  navDrawer.classList.remove("open");
+  navScrim.classList.remove("open");
+  document.body.style.overflow = "";
 }
 
-async function typeBoot() {
-  if (reducedMotion) { renderBootInstant(); return; }
-  for (const line of BOOT_LINES) {
-    const span = document.createElement("span");
-    span.className = line.c;
-    bootEl.appendChild(span);
-    for (const ch of line.t) {
-      span.textContent += ch;
-      // commands type slower than log output — feels like a real session
-      await sleep(line.c === "cmd" ? 18 : 5);
+navToggle.addEventListener("click", openDrawer);
+drawerClose.addEventListener("click", closeDrawer);
+navScrim.addEventListener("click", closeDrawer);
+navDrawer.addEventListener("click", (e) => {
+  if (e.target.closest("a")) closeDrawer();
+});
+
+/* ── Active section tracking ── */
+const navChips = [...document.querySelectorAll(".nav-chip")];
+const drawerLinks = [...document.querySelectorAll(".drawer-link")];
+const sectionIds = navChips.map((a) => a.dataset.section);
+const sectionEls = sectionIds.map((id) => document.getElementById(id));
+
+const sectionObserver = new IntersectionObserver(
+  (entries) => {
+    for (const en of entries) {
+      if (!en.isIntersecting) continue;
+      const idx = sectionEls.indexOf(en.target);
+      if (idx < 0) continue;
+      navChips.forEach((c) => c.classList.remove("active"));
+      drawerLinks.forEach((l) => l.classList.remove("active"));
+      navChips[idx].classList.add("active");
+      if (drawerLinks[idx]) drawerLinks[idx].classList.add("active");
     }
-    bootEl.appendChild(document.createTextNode("\n"));
-  }
-  const cur = document.createElement("span");
-  cur.className = "cursor";
-  bootEl.appendChild(cur);
-}
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-typeBoot();
+  },
+  { rootMargin: "-40% 0px -55% 0px" }
+);
+sectionEls.forEach((s) => s && sectionObserver.observe(s));
 
-/* ── hero waveform ──
-   Draws three traces into the SVG: clk (square), rst_n (deassert),
-   career_bus (bus transitions with hex labels). Animated via
-   stroke-dashoffset so the trace "sweeps" in like a live capture. */
+/* ── Scroll reveal animations ── */
+if (!reducedMotion) {
+  const revealTargets = [
+    ...document.querySelectorAll(".section-header"),
+    ...document.querySelectorAll(".about-text"),
+    ...document.querySelectorAll(".detail-card"),
+    ...document.querySelectorAll(".resume-card"),
+    ...document.querySelectorAll(".hero-content"),
+    ...document.querySelectorAll(".hero-visual"),
+  ];
+  revealTargets.forEach((el) => el.classList.add("reveal"));
+
+  const staggerTargets = [
+    document.querySelector(".skills-grid"),
+    document.querySelector(".proj-grid"),
+    document.querySelector(".beyond-grid"),
+    document.querySelector(".contact-grid"),
+    document.querySelector(".hero-chips"),
+  ];
+  staggerTargets.forEach((el) => { if (el) el.classList.add("stagger"); });
+
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((en) => {
+        if (en.isIntersecting) {
+          en.target.classList.add("visible");
+          revealObserver.unobserve(en.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  [...revealTargets, ...staggerTargets.filter(Boolean)].forEach((el) =>
+    revealObserver.observe(el)
+  );
+}
+
+/* ── Hero waveform ── */
 (function drawWave() {
   const svg = document.getElementById("waveSvg");
   const W = 760, H = 190;
   const NS = "http://www.w3.org/2000/svg";
-  const rows = [38, 95, 152];      // y-centers for the 3 traces
-  const A = 16;                    // amplitude (half-height of a toggle)
-  const X0 = 170;                  // trace start — clears the signal-name column
+  const rows = [38, 95, 152];
+  const A = 16;
+  const X0 = 170;
 
-  // timebase grid lines
+  const primary = "#D4A373";
+  const secondary = "#B8C49C";
+  const tertiary = "#C4A68C";
+  const muted = "#5C4F4B";
+
   for (let x = X0; x < W; x += 48) {
     const g = document.createElementNS(NS, "line");
     g.setAttribute("x1", x); g.setAttribute("x2", x);
     g.setAttribute("y1", 8); g.setAttribute("y2", H - 8);
-    g.setAttribute("stroke", "#141C26");
+    g.setAttribute("stroke", muted);
+    g.setAttribute("stroke-opacity", "0.3");
     svg.appendChild(g);
   }
 
-  // clk: clean square wave
   let d = `M ${X0} ${rows[0] + A}`;
   for (let x = X0; x < W - 10; x += 40) {
     d += ` H ${x + 20} V ${rows[0] - A} H ${x + 40} V ${rows[0] + A}`;
   }
-  addPath(d, "#FFB454", 0);
+  addPath(d, primary, 0);
 
-  // rst_n: low, then deasserts (goes high) early and stays high
   d = `M ${X0} ${rows[1] + A} H ${X0 + 110} V ${rows[1] - A} H ${W - 10}`;
-  addPath(d, "#5BE49B", 300);
+  addPath(d, secondary, 300);
 
-  // career_bus: bus-style "eye" transitions
   d = `M ${X0} ${rows[2]}`;
   const seg = 142;
   for (let x = X0; x < W - 30; x += seg) {
-    d += ` M ${x} ${rows[2] - A} H ${x + seg - 14} L ${x + seg} ${rows[2]} ` +
-         ` M ${x} ${rows[2] + A} H ${x + seg - 14} L ${x + seg} ${rows[2]} `;
+    d += ` M ${x} ${rows[2] - A} H ${x + seg - 14} L ${x + seg} ${rows[2]} `
+       + ` M ${x} ${rows[2] + A} H ${x + seg - 14} L ${x + seg} ${rows[2]} `;
   }
-  addPath(d, "#62D2E8", 600);
+  addPath(d, tertiary, 600);
 
-  // bus value labels
-  const labels = ["CE_2024", "CS_2026", "DV_ROLE", "0xC0FFEE"];
+  const labels = ["CE_2024", "CS_2027", "DV_ROLE", "0xC0FFEE"];
   labels.forEach((txt, i) => {
     const t = document.createElementNS(NS, "text");
     t.setAttribute("x", X0 + 16 + i * seg);
     t.setAttribute("y", rows[2] + 4);
-    t.setAttribute("fill", "#5F7080");
+    t.setAttribute("fill", muted);
     t.setAttribute("font-size", "11");
     t.setAttribute("font-family", "JetBrains Mono, monospace");
     t.textContent = txt;
@@ -128,17 +178,14 @@ typeBoot();
     const len = p.getTotalLength();
     p.style.strokeDasharray = len;
     p.style.strokeDashoffset = len;
-    p.style.transition = `stroke-dashoffset 1.6s ease ${delay}ms`;
+    p.style.transition = `stroke-dashoffset 1.8s cubic-bezier(0.2, 0, 0, 1) ${delay}ms`;
     requestAnimationFrame(() =>
       requestAnimationFrame(() => { p.style.strokeDashoffset = "0"; })
     );
   }
 })();
 
-/* ── live GitHub repo grid ──
-   Fetched in the visitor's browser, so the list never goes stale.
-   Featured repos and forks are filtered out. Fails quietly with a
-   link fallback if the API rate-limits. */
+/* ── Live GitHub repos ── */
 (async function loadRepos() {
   const grid = document.getElementById("repoGrid");
   const status = document.getElementById("repoStatus");
@@ -169,8 +216,7 @@ typeBoot();
     }
   } catch (e) {
     status.innerHTML =
-      `// GitHub API unavailable right now — browse directly: ` +
-      `<a href="https://github.com/${CONFIG.githubUser}?tab=repositories" target="_blank" rel="noopener">github.com/${CONFIG.githubUser}</a>`;
+      `GitHub API unavailable — <a href="https://github.com/${CONFIG.githubUser}?tab=repositories" target="_blank" rel="noopener">browse directly</a>`;
   }
 })();
 
@@ -179,26 +225,3 @@ function escapeHtml(s) {
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])
   );
 }
-
-/* ── nav: active section highlight + mobile toggle ── */
-const pane = document.getElementById("signalPane");
-const toggle = document.getElementById("paneToggle");
-toggle.addEventListener("click", () => pane.classList.toggle("open"));
-pane.addEventListener("click", (e) => {
-  if (e.target.closest("a")) pane.classList.remove("open");
-});
-
-const sigLinks = [...document.querySelectorAll(".sig")];
-const sections = sigLinks.map((a) => document.querySelector(a.getAttribute("href")));
-const io = new IntersectionObserver(
-  (entries) => {
-    for (const en of entries) {
-      if (!en.isIntersecting) continue;
-      sigLinks.forEach((a) => a.classList.remove("active"));
-      const idx = sections.indexOf(en.target);
-      if (idx >= 0) sigLinks[idx].classList.add("active");
-    }
-  },
-  { rootMargin: "-40% 0px -55% 0px" }
-);
-sections.forEach((s) => s && io.observe(s));
