@@ -734,10 +734,11 @@ main { padding-top: 64px; }
   border-radius: var(--shape-md);
 }
 .beyond-card h3 {
-  font-family: var(--font-mono);
-  font-size: 20px;
+  font-family: var(--font-display);
+  font-size: 28px;
   font-weight: 700;
   color: var(--md-on-surface);
+  letter-spacing: -.02em;
 }
 .beyond-card p {
   font-size: 14px;
@@ -783,10 +784,10 @@ main { padding-top: 64px; }
   min-width: 0;
 }
 .contact-label {
-  font-size: 22px;
+  font-size: 28px;
   font-weight: 700;
   color: var(--md-on-surface);
-  letter-spacing: -.01em;
+  letter-spacing: -.02em;
 }
 .contact-value {
   font-size: 13px;
