@@ -21,7 +21,7 @@ const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matc
 document.getElementById("year").textContent = new Date().getFullYear();
 const emailLink = document.getElementById("emailLink");
 emailLink.href = "mailto:" + CONFIG.email;
-document.getElementById("emailValue").textContent = CONFIG.email;
+document.getElementById("emailValue").textContent = "Email";
 
 /* ── Top bar scroll effect ── */
 const topBar = document.getElementById("topBar");
