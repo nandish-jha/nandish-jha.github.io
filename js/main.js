@@ -12,6 +12,10 @@ const CONFIG = {
     "ucosii_binary_game_hal",
     "discord_light_chat_web_app",
     "space-booker",
+    "boop-app",
+    "xswitch-verification",
+    "full_microprocessor",
+    "LogLens",
   ],
 };
 
