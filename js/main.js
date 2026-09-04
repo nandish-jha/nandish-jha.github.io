@@ -21,54 +21,6 @@ window.addEventListener("scroll", () => {
   });
 }, { passive: true });
 
-/* ── Section rail (right-side progress) ── */
-(function initSectionRail() {
-  const rail = document.getElementById("sectionRail");
-  if (!rail) return;
-  const links = [...rail.querySelectorAll("a[data-section]")];
-  const sections = links
-    .map((a) => document.getElementById(a.dataset.section))
-    .filter(Boolean);
-
-  const setActive = (id) => {
-    links.forEach((a) => {
-      const on = a.dataset.section === id;
-      a.classList.toggle("is-active", on);
-      if (on) a.setAttribute("aria-current", "true");
-      else a.removeAttribute("aria-current");
-    });
-  };
-
-  if (reduced || !("IntersectionObserver" in window)) {
-    setActive(sections[0]?.id || "intro");
-    return;
-  }
-
-  const visible = new Map();
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((e) => {
-        visible.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0);
-      });
-      let best = null;
-      let bestScore = -1;
-      visible.forEach((ratio, id) => {
-        if (ratio > bestScore) {
-          bestScore = ratio;
-          best = id;
-        }
-      });
-      if (best) setActive(best);
-    },
-    {
-      threshold: [0.15, 0.35, 0.55, 0.75],
-      rootMargin: "-18% 0px -35% 0px",
-    }
-  );
-  sections.forEach((s) => io.observe(s));
-  setActive("intro");
-})();
-
 /* ── Off the clock mixtape ── */
 (function initLifeReel() {
   const tracks = [...document.querySelectorAll(".life-track")];

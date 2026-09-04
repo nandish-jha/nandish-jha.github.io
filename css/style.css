@@ -155,97 +155,6 @@ a:hover { color: var(--copper-soft); }
   will-change: transform;
 }
 
-/* Right-side section rail — bare vertical line + dots */
-.section-rail {
-  position: fixed;
-  right: max(16px, env(safe-area-inset-right, 0px) + 10px);
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 55;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-  padding: 0;
-  border: none;
-  background: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  box-shadow: none;
-}
-.section-rail::before {
-  content: "";
-  position: absolute;
-  top: 6px;
-  bottom: 6px;
-  left: 50%;
-  width: 1px;
-  transform: translateX(-50%);
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(255, 255, 255, 0.28) 8%,
-    rgba(255, 255, 255, 0.28) 92%,
-    transparent
-  );
-  pointer-events: none;
-}
-.section-rail a {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  color: var(--ink-dim);
-  transition: color 0.25s var(--ease);
-}
-.section-rail a:hover { color: var(--ink); }
-.section-rail .rail-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(255, 255, 255, 0.45);
-  background: var(--bg);
-  flex-shrink: 0;
-  transition: transform 0.25s var(--ease), background 0.25s, border-color 0.25s, box-shadow 0.25s;
-}
-.section-rail .rail-label {
-  position: absolute;
-  right: calc(100% + 10px);
-  top: 50%;
-  transform: translateY(-50%);
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  opacity: 0;
-  pointer-events: none;
-  white-space: nowrap;
-  transition: opacity 0.25s;
-}
-.section-rail a.is-active {
-  color: var(--copper-soft);
-}
-.section-rail a.is-active .rail-dot {
-  width: 10px;
-  height: 10px;
-  border-color: var(--copper);
-  background: var(--copper);
-  box-shadow: 0 0 12px rgba(255, 90, 31, 0.55);
-  transform: scale(1.05);
-}
-.section-rail a.is-active .rail-label,
-.section-rail a:hover .rail-label,
-.section-rail a:focus-visible .rail-label {
-  opacity: 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .section-rail a.is-active .rail-dot { box-shadow: none; }
-}
-
 main { position: relative; z-index: 1; padding-top: 28px; }
 
 /* Floating dock nav */
@@ -1060,10 +969,6 @@ main { position: relative; z-index: 1; padding-top: 28px; }
     padding: 24px;
   }
   .work-controls { padding-bottom: 0; }
-  .section-rail {
-    right: 8px;
-  }
-  .section-rail .rail-label { display: none; }
   .display { font-size: clamp(64px, 18vw, 100px); }
 }
 

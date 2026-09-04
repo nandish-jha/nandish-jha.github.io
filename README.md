@@ -9,7 +9,7 @@ Theme: matte black + orange, signal-grid atmosphere, scroll reveals, and perspec
 ```
 index.html        page content
 css/style.css     design tokens + layout
-js/main.js        CONFIG, scroll, section rail, perspective pan
+js/main.js        CONFIG, scroll, perspective pan
 assets/           Nandish_Jha_Resume.pdf
 blog/             public blog + admin desk
 .nojekyll         GitHub Pages serves files as-is
