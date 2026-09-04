@@ -59,8 +59,10 @@
       </div>
     </div>
     <div class="scroll-hint reveal">
-      <span>Scroll</span>
-      <div class="scroll-line"></div>
+      <span class="scroll-label">Scroll</span>
+      <div class="scroll-pill">
+        <div class="scroll-dot"></div>
+      </div>
     </div>
   </section>
 
@@ -104,31 +106,74 @@
     <div class="panel-head">
       <p class="eyebrow reveal">Skill register</p>
       <h2 class="section-display reveal">What I build with</h2>
+      <p class="panel-lede reveal">A balanced stack — verification silicon on one side, shipping software on the other.</p>
     </div>
     <div class="craft-grid">
       <article class="craft-card tilt" data-depth="0.5">
+        <div class="craft-top">
+          <span class="card-num">01</span>
+          <span class="craft-side">Hardware</span>
+        </div>
         <h3>Verification</h3>
-        <p>SystemVerilog · UVM · constrained-random · coverage · assertions</p>
+        <p>Constrained-random testbenches, coverage closure, and assertion-driven debug.</p>
+        <div class="tag-row">
+          <span>SystemVerilog</span><span>UVM</span><span>Coverage</span><span>Assertions</span>
+        </div>
       </article>
       <article class="craft-card tilt" data-depth="0.6">
+        <div class="craft-top">
+          <span class="card-num">02</span>
+          <span class="craft-side">Hardware</span>
+        </div>
         <h3>RTL Design</h3>
-        <p>Verilog · VHDL · FPGA · Quartus · timing closure</p>
+        <p>FPGA flows from RTL to bitstream — Quartus, timing, and board bring-up.</p>
+        <div class="tag-row">
+          <span>Verilog</span><span>VHDL</span><span>FPGA</span><span>Quartus</span>
+        </div>
       </article>
       <article class="craft-card tilt" data-depth="0.45">
+        <div class="craft-top">
+          <span class="card-num">03</span>
+          <span class="craft-side">Hardware</span>
+        </div>
         <h3>EDA Tools</h3>
-        <p>QuestaSim · Cadence · Synopsys · GTKWave · TCL</p>
+        <p>Simulator and waveform workflows for finding the bug before silicon does.</p>
+        <div class="tag-row">
+          <span>QuestaSim</span><span>Cadence</span><span>Synopsys</span><span>GTKWave</span>
+        </div>
       </article>
       <article class="craft-card tilt" data-depth="0.55">
+        <div class="craft-top">
+          <span class="card-num">04</span>
+          <span class="craft-side">Software</span>
+        </div>
         <h3>Software</h3>
-        <p>Python · C/C++ · Bash · Java · JavaScript · TxL</p>
+        <p>Pipelines, services, and apps — from scripts to shipped interfaces.</p>
+        <div class="tag-row">
+          <span>Python</span><span>C/C++</span><span>Java</span><span>JavaScript</span>
+        </div>
       </article>
       <article class="craft-card tilt" data-depth="0.65">
+        <div class="craft-top">
+          <span class="card-num">05</span>
+          <span class="craft-side">Both</span>
+        </div>
         <h3>Embedded</h3>
-        <p>RPi · Pico · ESP32 · Arduino · MicroPython · RTOS</p>
+        <p>Boards, sensors, and real-time loops on metal you can hold.</p>
+        <div class="tag-row">
+          <span>RPi</span><span>ESP32</span><span>Pico</span><span>RTOS</span>
+        </div>
       </article>
       <article class="craft-card tilt" data-depth="0.5">
+        <div class="craft-top">
+          <span class="card-num">06</span>
+          <span class="craft-side">Both</span>
+        </div>
         <h3>Low-Level</h3>
-        <p>ARM · RISC-V · xv6 · Linux internals · Git</p>
+        <p>Kernels, assembly, and the machinery under the abstractions.</p>
+        <div class="tag-row">
+          <span>ARM</span><span>RISC-V</span><span>xv6</span><span>Linux</span>
+        </div>
       </article>
     </div>
   </section>
@@ -138,6 +183,7 @@
     <div class="panel-head">
       <p class="eyebrow reveal">Selected builds</p>
       <h2 class="section-display reveal">Projects</h2>
+      <p class="panel-lede reveal">Hardware benches, product apps, and systems work — featured first.</p>
     </div>
     <div class="work-list">
       <a class="work-item tilt" data-depth="0.35" href="https://github.com/nandish-jha/xswitch-verification" target="_blank" rel="noopener">
@@ -145,48 +191,66 @@
         <div class="work-body">
           <h3>Xswitch Verification</h3>
           <p>UVM testbench for an Xswitch — constrained-random, coverage, assertions.</p>
+          <div class="tag-row">
+            <span>SystemVerilog</span><span>UVM</span>
+          </div>
         </div>
-        <span class="work-tags">SystemVerilog · UVM</span>
+        <span class="work-go">Open →</span>
       </a>
       <a class="work-item tilt" data-depth="0.4" href="https://github.com/nandish-jha/full_microprocessor" target="_blank" rel="noopener">
         <span class="work-idx">02</span>
         <div class="work-body">
           <h3>Full Microprocessor</h3>
           <p>4-bit software-based MPU designed in Verilog and synthesized on FPGA.</p>
+          <div class="tag-row">
+            <span>Verilog</span><span>FPGA</span>
+          </div>
         </div>
-        <span class="work-tags">Verilog · FPGA</span>
+        <span class="work-go">Open →</span>
       </a>
       <a class="work-item tilt" data-depth="0.45" href="https://github.com/nandish-jha/nest_hub_on_LCD" target="_blank" rel="noopener">
         <span class="work-idx">03</span>
         <div class="work-body">
           <h3>Nest Hub on LCD</h3>
           <p>Smart display on Raspberry Pi 4 — Python UI, peripherals, real hardware.</p>
+          <div class="tag-row">
+            <span>Python</span><span>RPi4</span>
+          </div>
         </div>
-        <span class="work-tags">Python · RPi4</span>
+        <span class="work-go">Open →</span>
       </a>
       <a class="work-item tilt" data-depth="0.5" href="https://github.com/nandish-jha/boop-app" target="_blank" rel="noopener">
         <span class="work-idx">04</span>
         <div class="work-body">
           <h3>ProDash</h3>
           <p>AMOLED productivity dashboard — PWA + Android APK.</p>
+          <div class="tag-row">
+            <span>Kotlin</span><span>Compose</span>
+          </div>
         </div>
-        <span class="work-tags">Kotlin · Compose</span>
+        <span class="work-go">Open →</span>
       </a>
       <a class="work-item tilt" data-depth="0.4" href="https://github.com/nandish-jha/discord_light_chat_web_app" target="_blank" rel="noopener">
         <span class="work-idx">05</span>
         <div class="work-body">
           <h3>Discord Light</h3>
           <p>Real-time web socializing platform, containerized with Docker.</p>
+          <div class="tag-row">
+            <span>JavaScript</span><span>Docker</span>
+          </div>
         </div>
-        <span class="work-tags">JavaScript · Docker</span>
+        <span class="work-go">Open →</span>
       </a>
       <a class="work-item tilt" data-depth="0.45" href="https://github.com/nandish-jha/LogLens" target="_blank" rel="noopener">
         <span class="work-idx">06</span>
         <div class="work-body">
           <h3>LogLens</h3>
           <p>Structured log file parser built in Perl.</p>
+          <div class="tag-row">
+            <span>Perl</span>
+          </div>
         </div>
-        <span class="work-tags">Perl</span>
+        <span class="work-go">Open →</span>
       </a>
     </div>
   </section>
@@ -196,22 +260,27 @@
     <div class="panel-head">
       <p class="eyebrow reveal">Beyond the lab</p>
       <h2 class="section-display reveal">Off the clock</h2>
+      <p class="panel-lede reveal">The same discipline — barbell, markets, frames, and fewer better things.</p>
     </div>
     <div class="life-grid">
       <article class="life-card tilt" data-depth="0.5">
+        <span class="life-mark">01 / IRON</span>
         <h3>iron.sh</h3>
         <p>Six days a week under a barbell — push/pull/legs hybrid. Discipline compiles.</p>
       </article>
       <article class="life-card tilt" data-depth="0.6">
+        <span class="life-mark">02 / MARKETS</span>
         <h3>markets.py</h3>
         <p>Self-taught investor learning options the slow, correct way.</p>
       </article>
       <article class="life-card tilt" data-depth="0.55">
+        <span class="life-mark">03 / FRAME</span>
         <h3>Unsplash</h3>
-        <p>Street, minimal, and architectural photography.</p>
+        <p>Street, minimal, and architectural photography — shared freely.</p>
         <a href="https://unsplash.com/@da_minimal_guy" target="_blank" rel="noopener">@da_minimal_guy →</a>
       </article>
       <article class="life-card tilt" data-depth="0.45">
+        <span class="life-mark">04 / MINIMAL</span>
         <h3>da_minimal_guy</h3>
         <p>Minimalism as an operating system — fewer things, better things.</p>
         <a href="https://www.instagram.com/da_minimal_guy/" target="_blank" rel="noopener">Instagram →</a>
