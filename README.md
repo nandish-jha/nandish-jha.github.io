@@ -2,7 +2,7 @@
 
 Static portfolio site. Zero build step. Pure HTML/CSS/JS + Three.js (CDN).
 
-Theme: matte black + orange, cinematic depth, scroll reveals, and ambient 3D.
+Theme: matte black + orange, signal-grid atmosphere, scroll reveals, and perspective card pan.
 
 ## Structure
 
