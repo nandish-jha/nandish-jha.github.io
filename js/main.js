@@ -9,17 +9,17 @@ document.getElementById("year").textContent = new Date().getFullYear();
 const email = document.getElementById("emailLink");
 email.href = "mailto:" + CONFIG.email;
 
-/* ── Floating dock scroll state ── */
-const navDock = document.getElementById("navDock");
-let dockTicking = false;
-window.addEventListener("scroll", () => {
-  if (dockTicking) return;
-  dockTicking = true;
-  requestAnimationFrame(() => {
-    navDock?.classList.toggle("is-compact", window.scrollY > 40);
-    dockTicking = false;
-  });
-}, { passive: true });
+/* ── Intro scroll cue fades after first scroll ── */
+(function initScrollCue() {
+  const cue = document.getElementById("scrollCue");
+  if (!cue) return;
+  const hide = () => {
+    if (window.scrollY > 40) cue.classList.add("is-gone");
+    else cue.classList.remove("is-gone");
+  };
+  window.addEventListener("scroll", hide, { passive: true });
+  hide();
+})();
 
 /* ── Off the clock mixtape ── */
 (function initLifeReel() {
