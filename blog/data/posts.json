@@ -1,0 +1,24 @@
+{
+  "posts": [
+    {
+      "id": "welcome-to-the-lab",
+      "title": "Welcome to the lab",
+      "date": "2026-09-04",
+      "category": "story",
+      "tags": ["meta", "intro"],
+      "excerpt": "Stories, tech notes, and project logs — written in public, edited when the compile finishes.",
+      "published": true,
+      "body": "## Why this exists\n\nThis blog is my public notebook: **stories**, **thoughts on new tech**, and **project logs** — things I've shipped, things I'm building, and things still living in the backlog.\n\nExpect a mix of:\n\n- Hardware verification notes (SystemVerilog, UVM, FPGA)\n- Software and product build write-ups\n- Occasional weekend tangents that somehow turn into systems thinking\n\n## How it works\n\nPosts live as structured data on this site. I write them from the admin desk when something is worth saying out loud.\n\nIf you're here from the portfolio — welcome. Stay for the builds."
+    },
+    {
+      "id": "hardware-software-same-desk",
+      "title": "Hardware and software on the same desk",
+      "date": "2026-09-03",
+      "category": "tech",
+      "tags": ["hardware", "software", "career"],
+      "excerpt": "Why I refuse to pick one side of the stack — and how that shows up in the work.",
+      "published": true,
+      "body": "## Both sides, same engineer\n\nMost people ask me to pick: silicon or software. I don't.\n\nOne week it's a constrained-random UVM bench and coverage closure. The next it's a Kotlin Android product, a Dockerized web app, or an ESP32 on the bench.\n\n### What that buys you\n\n- Better instincts about where bugs actually live\n- Respect for timing, power, and latency — not just \"make it pretty\"\n- Products that feel like systems, not demos\n\nI'll keep posting project notes here as they leave the lab."
+    }
+  ]
+}

@@ -10,6 +10,26 @@ document.getElementById("year").textContent = new Date().getFullYear();
 const email = document.getElementById("emailLink");
 email.href = "mailto:" + CONFIG.email;
 
+/* ── Floating dock scroll state ── */
+const navDock = document.getElementById("navDock");
+window.addEventListener("scroll", () => {
+  navDock?.classList.toggle("is-compact", window.scrollY > 40);
+}, { passive: true });
+
+/* ── Off the clock mixtape ── */
+(function initLifeReel() {
+  const tracks = [...document.querySelectorAll(".life-track")];
+  const panels = [...document.querySelectorAll(".life-feature")];
+  if (!tracks.length) return;
+  tracks.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.life;
+      tracks.forEach((t) => t.classList.toggle("is-active", t === btn));
+      panels.forEach((p) => p.classList.toggle("is-active", p.dataset.lifePanel === id));
+    });
+  });
+})();
+
 /* ── Scroll reveals ── */
 const reveals = [...document.querySelectorAll(".reveal")];
 if (!reduced) {

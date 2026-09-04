@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Blog Admin — Nandish Jha</title>
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/blog.css" />
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div>
+<div class="shell admin-shell">
+  <header class="blog-nav">
+    <a class="mark" href="../">NJ</a>
+    <div class="links">
+      <a class="home-link" href="./">Blog</a>
+      <a href="../">Portfolio</a>
+    </div>
+  </header>
+
+  <div id="loginView" class="login-card">
+    <p class="eyebrow">Private desk</p>
+    <h1>Blog admin</h1>
+    <p>Sign in to draft stories, tech notes, and project posts. Publish by downloading JSON or committing with a GitHub token.</p>
+    <form id="loginForm">
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" required />
+      </div>
+      <div class="btn-row">
+        <button class="btn" type="submit">Unlock</button>
+      </div>
+      <p class="status" id="loginStatus"></p>
+    </form>
+  </div>
+
+  <div id="adminView" class="admin-panel" hidden>
+    <div class="admin-layout">
+      <aside class="admin-side">
+        <h2>Posts</h2>
+        <button type="button" class="btn" id="newPostBtn" style="width:100%;margin-bottom:12px">New post</button>
+        <div id="postPicker"></div>
+      </aside>
+
+      <div>
+        <p class="eyebrow">Editor</p>
+        <form id="editorForm">
+          <div class="field">
+            <label for="title">Title</label>
+            <input id="title" required />
+          </div>
+          <div class="row-2">
+            <div class="field">
+              <label for="slug">Slug / id</label>
+              <input id="slug" required />
+            </div>
+            <div class="field">
+              <label for="date">Date</label>
+              <input id="date" type="date" required />
+            </div>
+          </div>
+          <div class="row-2">
+            <div class="field">
+              <label for="category">Category</label>
+              <select id="category">
+                <option value="story">Story</option>
+                <option value="tech">Tech</option>
+                <option value="project">Project</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="tags">Tags (comma-separated)</label>
+              <input id="tags" placeholder="fpga, uvm, android" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="excerpt">Excerpt</label>
+            <input id="excerpt" />
+          </div>
+          <div class="field">
+            <label for="body">Body (Markdown)</label>
+            <textarea id="body" placeholder="## Heading&#10;&#10;Write your post…"></textarea>
+          </div>
+          <label class="check">
+            <input type="checkbox" id="published" checked />
+            Published (visible on the public blog)
+          </label>
+          <div class="btn-row">
+            <button type="submit" class="btn">Save to list</button>
+            <button type="button" class="btn btn-ghost" id="previewBtn">Preview</button>
+            <button type="button" class="btn btn-danger" id="deleteBtn">Delete</button>
+          </div>
+        </form>
+
+        <div class="help">
+          <p><strong>Publish to the live site</strong></p>
+          <p style="margin-top:8px">1. Download <code>posts.json</code> and commit it to the repo, or</p>
+          <p>2. Paste a GitHub personal access token (repo scope) below and push from here.</p>
+          <div class="field" style="margin-top:16px">
+            <label for="token">GitHub PAT (optional, never stored)</label>
+            <input id="token" type="password" autocomplete="off" placeholder="ghp_…" />
+          </div>
+          <div class="btn-row">
+            <button type="button" class="btn" id="downloadBtn">Download posts.json</button>
+            <button type="button" class="btn btn-ghost" id="pushBtn">Push to GitHub</button>
+            <button type="button" class="btn btn-ghost" id="logoutBtn">Lock desk</button>
+          </div>
+          <p class="status" id="adminStatus"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="module" src="js/admin.js"></script>
+</body>
+</html>

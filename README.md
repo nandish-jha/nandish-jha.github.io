@@ -11,6 +11,7 @@ index.html        page content
 css/style.css     design tokens + layout
 js/main.js        CONFIG, scroll/tilt motion, Three.js scene
 assets/           Nandish_Jha_Resume.pdf
+blog/             public blog + admin desk
 .nojekyll         GitHub Pages serves files as-is
 ```
 
@@ -19,6 +20,15 @@ assets/           Nandish_Jha_Resume.pdf
 - **Email** — `js/main.js` → `CONFIG.email`
 - **Colors / fonts** — `css/style.css` `:root`
 - **Copy / projects** — `index.html`
+- **Blog posts** — `blog/data/posts.json` or use `/blog/admin.html`
+
+## Blog admin
+
+Open https://nandish-jha.github.io/blog/admin.html
+
+Default password: `nj-admin-2026` (change by updating the SHA-256 in `blog/js/config.js`).
+
+Publish by downloading `posts.json` into `blog/data/`, or push from admin with a GitHub PAT (repo scope). The token is never stored.
 
 ## Deploy
 

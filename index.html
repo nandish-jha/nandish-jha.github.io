@@ -25,13 +25,14 @@
 <div class="grain" aria-hidden="true"></div>
 <canvas id="scene3d" aria-hidden="true"></canvas>
 
-<header class="nav">
+<header class="nav-dock" id="navDock">
   <a class="nav-mark" href="#intro">NJ</a>
   <nav class="nav-links">
     <a href="#story">Story</a>
     <a href="#craft">Craft</a>
     <a href="#work">Work</a>
     <a href="#life">Life</a>
+    <a href="blog/">Blog</a>
     <a href="#connect">Talk</a>
     <a href="#elsewhere">Elsewhere</a>
   </nav>
@@ -50,7 +51,7 @@
       <p class="lede reveal">Equal parts silicon and software — verification, embedded builds, and full-stack products that ship.</p>
       <div class="intro-actions reveal">
         <a class="btn btn-solid" href="#work">View Projects</a>
-        <a class="btn btn-ghost" href="https://linktr.ee/nandish_jha" target="_blank" rel="noopener">View Blog</a>
+        <a class="btn btn-blog" href="blog/">View Blog</a>
         <a class="btn btn-ghost" href="#connect">Get in Touch</a>
       </div>
       <div class="meta-row reveal">
@@ -252,42 +253,57 @@
     </div>
   </section>
 
-  <!-- LIFE -->
+  <!-- LIFE — unique weekend reel (not a card grid) -->
   <section id="life" class="panel life">
-    <div class="panel-head">
+    <div class="life-intro">
       <p class="eyebrow reveal">Weekend mode · unlocked</p>
       <h2 class="section-display reveal">Off the clock</h2>
-      <p class="panel-lede reveal">When the simulator stops — lift heavy, learn markets, chase light, keep the feed clean.</p>
+      <p class="panel-lede reveal">A mixtape, not a spreadsheet — click a track or just scroll the reel.</p>
     </div>
-    <div class="life-grid">
-      <article class="life-card life-card-a tilt" data-depth="0.5">
-        <span class="life-emoji" aria-hidden="true">◈</span>
-        <span class="life-mark">01 · LOADING IRON</span>
-        <h3>iron.sh</h3>
-        <p>Six days under a barbell. Push / pull / legs. Sweat is just another compile flag.</p>
+    <div class="life-reel" id="lifeReel">
+      <button type="button" class="life-track is-active" data-life="0">
+        <span class="life-track-num">01</span>
+        <span class="life-track-name">iron.sh</span>
+      </button>
+      <button type="button" class="life-track" data-life="1">
+        <span class="life-track-num">02</span>
+        <span class="life-track-name">markets.py</span>
+      </button>
+      <button type="button" class="life-track" data-life="2">
+        <span class="life-track-num">03</span>
+        <span class="life-track-name">Unsplash</span>
+      </button>
+      <button type="button" class="life-track" data-life="3">
+        <span class="life-track-num">04</span>
+        <span class="life-track-name">da_minimal_guy</span>
+      </button>
+    </div>
+    <div class="life-stage">
+      <article class="life-feature is-active" data-life-panel="0">
+        <p class="life-kicker">LOADING IRON</p>
+        <h3>Six days. One barbell. Zero excuses.</h3>
+        <p>Push / pull / legs hybrid. Sweat is just another compile flag — and the PR counts more than the commit message.</p>
         <span class="life-chip">PPL · 6× / week</span>
       </article>
-      <article class="life-card life-card-b tilt" data-depth="0.6">
-        <span class="life-emoji" aria-hidden="true">↗</span>
-        <span class="life-mark">02 · RISK.PY</span>
-        <h3>markets.py</h3>
-        <p>Options, the slow way. Manage the downside first — upside is a nice-to-have.</p>
+      <article class="life-feature" data-life-panel="1">
+        <p class="life-kicker">RISK.PY</p>
+        <h3>Options, the slow correct way.</h3>
+        <p>Manage the downside first. Upside is a nice-to-have. Markets as a long-running experiment, not a dopamine slot.</p>
         <span class="life-chip">Long-term · curious</span>
       </article>
-      <article class="life-card life-card-c tilt" data-depth="0.55">
-        <span class="life-emoji" aria-hidden="true">▣</span>
-        <span class="life-mark">03 · OPEN SHUTTER</span>
-        <h3>Unsplash</h3>
-        <p>Street, stone, and quiet light — photos that don't need a caption to breathe.</p>
-        <a href="https://unsplash.com/@da_minimal_guy" target="_blank" rel="noopener">Browse the feed →</a>
+      <article class="life-feature" data-life-panel="2">
+        <p class="life-kicker">OPEN SHUTTER</p>
+        <h3>Street, stone, quiet light.</h3>
+        <p>Photos that don't need a caption to breathe — shared free on Unsplash for anyone who wants them.</p>
+        <a class="life-link" href="https://unsplash.com/@da_minimal_guy" target="_blank" rel="noopener">Browse the feed →</a>
       </article>
-      <article class="life-card life-card-d tilt" data-depth="0.45">
-        <span class="life-emoji" aria-hidden="true">○</span>
-        <span class="life-mark">04 · LESS = MORE</span>
-        <h3>da_minimal_guy</h3>
-        <p>Minimalism as an OS. Delete clutter. Keep the good bits. Reboot often.</p>
-        <a href="https://www.instagram.com/da_minimal_guy/" target="_blank" rel="noopener">See the aesthetic →</a>
+      <article class="life-feature" data-life-panel="3">
+        <p class="life-kicker">LESS = MORE</p>
+        <h3>Minimalism as an operating system.</h3>
+        <p>Delete clutter. Keep the good bits. Reboot often. The aesthetic lives on Instagram.</p>
+        <a class="life-link" href="https://www.instagram.com/da_minimal_guy/" target="_blank" rel="noopener">See the aesthetic →</a>
       </article>
+      <div class="life-orb" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -310,37 +326,37 @@
     </div>
   </section>
 
-  <!-- ELSEWHERE — social / products / public presence -->
+  <!-- ELSEWHERE — vertical posters -->
   <section id="elsewhere" class="panel elsewhere">
     <div class="panel-head">
       <p class="eyebrow reveal">Public square</p>
       <h2 class="section-display reveal">Elsewhere</h2>
-      <p class="panel-lede reveal">Code, links, photos, and things for sale — the rest of the map.</p>
+      <p class="panel-lede reveal">Shop, code, links, and visuals — four tall doors out of the portfolio.</p>
     </div>
-    <div class="elsewhere-grid">
-      <a class="elsewhere-card tilt" data-depth="0.35" href="https://github.com/nandish-jha" target="_blank" rel="noopener">
-        <span class="elsewhere-kicker">Repos</span>
+    <div class="elsewhere-row">
+      <a class="elsewhere-poster" href="https://nandishjha.gumroad.com/" target="_blank" rel="noopener">
+        <span class="elsewhere-kicker">01 · SHOP</span>
+        <h3>Gumroad</h3>
+        <p>Digital drops and products — support the work directly.</p>
+        <span class="elsewhere-go">Open shop →</span>
+      </a>
+      <a class="elsewhere-poster" href="https://github.com/nandish-jha" target="_blank" rel="noopener">
+        <span class="elsewhere-kicker">02 · REPOS</span>
         <h3>GitHub</h3>
         <p>Public experiments, verification benches, and side builds.</p>
         <span class="elsewhere-go">nandish-jha →</span>
       </a>
-      <a class="elsewhere-card tilt" data-depth="0.4" href="https://linktr.ee/nandish_jha" target="_blank" rel="noopener">
-        <span class="elsewhere-kicker">LINKS</span>
+      <a class="elsewhere-poster" href="https://linktr.ee/nandish_jha" target="_blank" rel="noopener">
+        <span class="elsewhere-kicker">03 · LINKS</span>
         <h3>Linktree</h3>
         <p>One door for the scattered tabs of the internet.</p>
-        <span class="elsewhere-go">linktr.ee/nandish_jha →</span>
+        <span class="elsewhere-go">All links →</span>
       </a>
-      <a class="elsewhere-card tilt" data-depth="0.45" href="https://www.instagram.com/da_minimal_guy/" target="_blank" rel="noopener">
-        <span class="elsewhere-kicker">VISUALS</span>
+      <a class="elsewhere-poster" href="https://www.instagram.com/da_minimal_guy/" target="_blank" rel="noopener">
+        <span class="elsewhere-kicker">04 · VISUALS</span>
         <h3>Instagram</h3>
         <p>Minimal frames, quiet corners, and the odd car obsession.</p>
         <span class="elsewhere-go">@da_minimal_guy →</span>
-      </a>
-      <a class="elsewhere-card tilt" data-depth="0.5" href="https://nandishjha.gumroad.com/" target="_blank" rel="noopener">
-        <span class="elsewhere-kicker">SHOP</span>
-        <h3>Gumroad</h3>
-        <p>Digital drops and products — support the work directly.</p>
-        <span class="elsewhere-go">nandishjha.gumroad.com →</span>
       </a>
     </div>
   </section>
