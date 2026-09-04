@@ -5,9 +5,7 @@ const CONFIG = {
 };
 
 const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const isCoarse = window.matchMedia("(hover: none), (pointer: coarse)").matches;
-const isNarrow = window.matchMedia("(max-width: 960px)").matches;
-const isMobilePerf = reduced || isCoarse || isNarrow;
+const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
 document.getElementById("year").textContent = new Date().getFullYear();
 const email = document.getElementById("emailLink");
@@ -24,6 +22,54 @@ window.addEventListener("scroll", () => {
     dockTicking = false;
   });
 }, { passive: true });
+
+/* ── Section rail (right-side progress) ── */
+(function initSectionRail() {
+  const rail = document.getElementById("sectionRail");
+  if (!rail) return;
+  const links = [...rail.querySelectorAll("a[data-section]")];
+  const sections = links
+    .map((a) => document.getElementById(a.dataset.section))
+    .filter(Boolean);
+
+  const setActive = (id) => {
+    links.forEach((a) => {
+      const on = a.dataset.section === id;
+      a.classList.toggle("is-active", on);
+      if (on) a.setAttribute("aria-current", "true");
+      else a.removeAttribute("aria-current");
+    });
+  };
+
+  if (reduced || !("IntersectionObserver" in window)) {
+    setActive(sections[0]?.id || "intro");
+    return;
+  }
+
+  const visible = new Map();
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        visible.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0);
+      });
+      let best = null;
+      let bestScore = -1;
+      visible.forEach((ratio, id) => {
+        if (ratio > bestScore) {
+          bestScore = ratio;
+          best = id;
+        }
+      });
+      if (best) setActive(best);
+    },
+    {
+      threshold: [0.15, 0.35, 0.55, 0.75],
+      rootMargin: "-18% 0px -35% 0px",
+    }
+  );
+  sections.forEach((s) => io.observe(s));
+  setActive("intro");
+})();
 
 /* ── Off the clock mixtape ── */
 (function initLifeReel() {
@@ -50,20 +96,19 @@ if (!reduced) {
         io.unobserve(e.target);
       });
     },
-    { threshold: isMobilePerf ? 0.08 : 0.18, rootMargin: "0px 0px -4% 0px" }
+    { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
   );
   reveals.forEach((el, i) => {
-    if (!isMobilePerf) el.style.transitionDelay = `${(i % 4) * 0.06}s`;
+    el.style.transitionDelay = `${(i % 4) * 0.05}s`;
     io.observe(el);
   });
 } else {
   reveals.forEach((el) => el.classList.add("in"));
 }
 
-/* ── 3D tilt cards (desktop pointer only) ── */
-if (!isMobilePerf) {
-  const tilts = [...document.querySelectorAll(".tilt")];
-  tilts.forEach((card) => {
+/* ── 3D tilt cards (fine pointer only — same look, no touch jank) ── */
+if (finePointer && !reduced) {
+  document.querySelectorAll(".tilt").forEach((card) => {
     const depth = parseFloat(card.dataset.depth || "0.45");
     let raf = 0;
     let tx = 0, ty = 0, cx = 0, cy = 0;
@@ -80,21 +125,17 @@ if (!isMobilePerf) {
       }
     };
 
-    card.addEventListener("pointerenter", (e) => {
-      if (e.pointerType !== "mouse") return;
+    card.addEventListener("pointerenter", () => {
       tracking = true;
       if (!raf) raf = requestAnimationFrame(render);
     });
-
     card.addEventListener("pointermove", (e) => {
-      if (e.pointerType !== "mouse") return;
       const r = card.getBoundingClientRect();
       const px = (e.clientX - r.left) / r.width - 0.5;
       const py = (e.clientY - r.top) / r.height - 0.5;
       tx = px * 14 * depth;
       ty = -py * 12 * depth;
     });
-
     card.addEventListener("pointerleave", () => {
       tracking = false;
       tx = 0;
@@ -122,18 +163,13 @@ if (!isMobilePerf) {
     next.disabled = list.scrollLeft >= max;
   };
 
-  prev.addEventListener("click", () => {
-    list.scrollBy({ left: -step(), behavior: "smooth" });
-  });
-  next.addEventListener("click", () => {
-    list.scrollBy({ left: step(), behavior: "smooth" });
-  });
+  prev.addEventListener("click", () => list.scrollBy({ left: -step(), behavior: "smooth" }));
+  next.addEventListener("click", () => list.scrollBy({ left: step(), behavior: "smooth" }));
   list.addEventListener("scroll", updateButtons, { passive: true });
   window.addEventListener("resize", updateButtons);
   updateButtons();
 
-  // Convert vertical wheel to horizontal when hovering the rail (desktop)
-  if (!isMobilePerf) {
+  if (finePointer) {
     list.addEventListener(
       "wheel",
       (e) => {
@@ -146,7 +182,6 @@ if (!isMobilePerf) {
     );
   }
 
-  // Drag to scroll (desktop)
   let down = false;
   let startX = 0;
   let startLeft = 0;
@@ -177,13 +212,10 @@ if (!isMobilePerf) {
   });
 })();
 
-/* ── Ambient Three.js scene (desktop only) ── */
+/* ── Ambient Three.js scene (all devices, paused when off-screen) ── */
 (function initScene() {
   const canvas = document.getElementById("scene3d");
-  if (!canvas || isMobilePerf) {
-    canvas?.remove();
-    return;
-  }
+  if (!canvas || reduced) return;
 
   const renderer = new THREE.WebGLRenderer({
     canvas,
@@ -191,7 +223,8 @@ if (!isMobilePerf) {
     alpha: true,
     powerPreference: "high-performance",
   });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+  const dprCap = finePointer ? 1.5 : 1.25;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, dprCap));
   renderer.setSize(window.innerWidth, window.innerHeight, false);
   renderer.setClearColor(0x000000, 0);
 
@@ -209,7 +242,6 @@ if (!isMobilePerf) {
 
   const orange = new THREE.Color("#ff5a1f");
   const matte = new THREE.Color("#1a1a1a");
-  // StandardMaterial is far cheaper than PhysicalMaterial
   const materials = [
     new THREE.MeshStandardMaterial({
       color: orange,
@@ -244,19 +276,16 @@ if (!isMobilePerf) {
   ];
 
   for (let i = 0; i < 8; i++) {
-    const geo = geos[i % geos.length];
-    const mat = materials[i % materials.length];
-    const mesh = new THREE.Mesh(geo, mat);
+    const mesh = new THREE.Mesh(geos[i % geos.length], materials[i % materials.length]);
     const angle = (i / 8) * Math.PI * 2;
     const radius = 1.8 + (i % 4) * 0.45;
     mesh.position.set(
       Math.cos(angle) * radius,
-      (Math.sin(i * 1.7) * 1.1) + 0.15,
+      Math.sin(i * 1.7) * 1.1 + 0.15,
       Math.sin(angle) * radius - 0.8
     );
     mesh.rotation.set(i * 0.3, i * 0.5, i * 0.15);
     mesh.scale.setScalar(0.55 + (i % 3) * 0.2);
-    mesh.frustumCulled = true;
     group.add(mesh);
     forms.push({
       mesh,
@@ -276,16 +305,15 @@ if (!isMobilePerf) {
   scene.add(fill);
 
   const mouse = { x: 0, y: 0 };
-  window.addEventListener("pointermove", (e) => {
-    if (e.pointerType && e.pointerType !== "mouse") return;
-    mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = (e.clientY / window.innerHeight) * 2 - 1;
-  }, { passive: true });
+  if (finePointer) {
+    window.addEventListener("pointermove", (e) => {
+      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = (e.clientY / window.innerHeight) * 2 - 1;
+    }, { passive: true });
+  }
 
   let scrollY = 0;
-  window.addEventListener("scroll", () => {
-    scrollY = window.scrollY;
-  }, { passive: true });
+  window.addEventListener("scroll", () => { scrollY = window.scrollY; }, { passive: true });
 
   let t = 0;
   let rafId = 0;
@@ -318,23 +346,23 @@ if (!isMobilePerf) {
   const start = () => {
     if (running || document.hidden) return;
     running = true;
+    canvas.style.visibility = "visible";
     rafId = requestAnimationFrame(frame);
   };
   const stop = () => {
     running = false;
     cancelAnimationFrame(rafId);
+    canvas.style.visibility = "hidden";
   };
 
-  // Only animate while the intro is on screen
   if (intro) {
-    const vis = new IntersectionObserver(
+    new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !document.hidden) start();
         else stop();
       },
       { threshold: 0.05 }
-    );
-    vis.observe(intro);
+    ).observe(intro);
   } else {
     start();
   }
@@ -347,9 +375,14 @@ if (!isMobilePerf) {
     } else start();
   });
 
+  let resizeTimer = 0;
   window.addEventListener("resize", () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight, false);
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, dprCap));
+      renderer.setSize(window.innerWidth, window.innerHeight, false);
+    }, 120);
   });
 })();
