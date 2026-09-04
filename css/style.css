@@ -662,7 +662,7 @@ main { position: relative; z-index: 1; }
   color: var(--copper);
 }
 
-/* Life */
+/* Life — playful weekend mode */
 .life-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -670,27 +670,128 @@ main { position: relative; z-index: 1; }
   perspective: 1200px;
 }
 .life-card {
-  min-height: 260px;
+  min-height: 300px;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  padding-top: 40px;
+}
+.life-card-a {
   background:
-    radial-gradient(ellipse 80% 60% at 100% 0%, rgba(255, 90, 31, 0.12), transparent 55%),
-    linear-gradient(145deg, rgba(28,28,28,0.95), rgba(10,10,10,0.8));
+    radial-gradient(ellipse 90% 70% at 0% 0%, rgba(255, 90, 31, 0.28), transparent 55%),
+    linear-gradient(145deg, rgba(32,28,26,0.98), rgba(10,10,10,0.9));
+}
+.life-card-b {
+  background:
+    radial-gradient(ellipse 90% 70% at 100% 0%, rgba(255, 140, 40, 0.22), transparent 55%),
+    linear-gradient(145deg, rgba(28,28,28,0.98), rgba(10,10,10,0.9));
+}
+.life-card-c {
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 100%, rgba(255, 90, 31, 0.16), transparent 50%),
+    linear-gradient(145deg, rgba(26,30,32,0.98), rgba(10,10,10,0.9));
+}
+.life-card-d {
+  background:
+    radial-gradient(ellipse 70% 50% at 100% 100%, rgba(255, 90, 31, 0.18), transparent 50%),
+    linear-gradient(145deg, rgba(28,26,30,0.98), rgba(10,10,10,0.9));
+}
+.life-emoji {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  font-size: 42px;
+  color: var(--copper);
+  opacity: 0.55;
+  line-height: 1;
+  transform: rotate(8deg);
+  transition: transform 0.4s var(--ease), opacity 0.4s;
+}
+.life-card:hover .life-emoji {
+  opacity: 1;
+  transform: rotate(-6deg) scale(1.1);
 }
 .life-mark {
   font-family: var(--mono);
   font-size: 13px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   color: var(--copper);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+}
+.life-chip {
+  display: inline-flex;
+  margin-top: auto;
+  padding-top: 22px;
+  align-self: flex-start;
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  border: 1px dashed rgba(255, 90, 31, 0.45);
+  border-radius: 999px;
+  padding: 8px 14px;
+  background: rgba(255, 90, 31, 0.08);
 }
 .life-card a {
   display: inline-block;
   margin-top: auto;
-  padding-top: 20px;
+  padding-top: 22px;
   font-family: var(--mono);
   font-size: 15px;
   letter-spacing: 0.06em;
+  color: var(--copper-soft);
+}
+
+/* Elsewhere */
+.elsewhere-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  perspective: 1200px;
+}
+.elsewhere-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 240px;
+  padding: 32px;
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(145deg, rgba(28,28,28,0.95), rgba(10,10,10,0.85));
+  transform-style: preserve-3d;
+  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+.elsewhere-card:hover {
+  border-color: rgba(255, 90, 31, 0.4);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 30px var(--glow);
+  color: inherit;
+  transform: translateY(-4px);
+}
+.elsewhere-kicker {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  color: var(--copper);
+  margin-bottom: 14px;
+}
+.elsewhere-card h3 {
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+}
+.elsewhere-card p {
+  color: var(--ink-dim);
+  font-size: clamp(16px, 1.7vw, 18px);
+  line-height: 1.55;
+  flex: 1;
+}
+.elsewhere-go {
+  margin-top: 24px;
+  font-family: var(--mono);
+  font-size: 14px;
+  letter-spacing: 0.05em;
   color: var(--copper-soft);
 }
 
@@ -771,7 +872,8 @@ main { position: relative; z-index: 1; }
   .story { grid-template-columns: 1fr; }
   .story-sticky { position: relative; top: 0; margin-bottom: 32px; }
   .craft-grid,
-  .life-grid { grid-template-columns: 1fr; }
+  .life-grid,
+  .elsewhere-grid { grid-template-columns: 1fr; }
   .work-head {
     flex-direction: column;
     align-items: flex-start;
