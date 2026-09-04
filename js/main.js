@@ -1,5 +1,3 @@
-import * as THREE from "three";
-
 const CONFIG = {
   email: "nandish.d.jha@gmail.com",
 };
@@ -106,44 +104,119 @@ if (!reduced) {
   reveals.forEach((el) => el.classList.add("in"));
 }
 
-/* ── 3D tilt cards (fine pointer only — same look, no touch jank) ── */
-if (finePointer && !reduced) {
-  document.querySelectorAll(".tilt").forEach((card) => {
-    const depth = parseFloat(card.dataset.depth || "0.45");
-    let raf = 0;
-    let tx = 0, ty = 0, cx = 0, cy = 0;
-    let tracking = false;
+/* ── Perspective pan on cards (mouse + finger) ── */
+(function initPerspectivePan() {
+  if (reduced) return;
 
-    const render = () => {
-      cx += (tx - cx) * 0.12;
-      cy += (ty - cy) * 0.12;
-      card.style.transform = `rotateX(${cy}deg) rotateY(${cx}deg) translateZ(0)`;
-      if (tracking || Math.abs(tx - cx) > 0.05 || Math.abs(ty - cy) > 0.05) {
-        raf = requestAnimationFrame(render);
+  const cards = [...document.querySelectorAll(".tilt")].map((el) => ({
+    el,
+    depth: parseFloat(el.dataset.depth || "0.5"),
+    rx: 0,
+    ry: 0,
+    tx: 0,
+    ty: 0,
+    visible: false,
+  }));
+  if (!cards.length) return;
+
+  const pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2, active: false };
+  let raf = 0;
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        const card = cards.find((c) => c.el === e.target);
+        if (card) card.visible = e.isIntersecting;
+      });
+    },
+    { rootMargin: "10% 0px", threshold: 0.05 }
+  );
+  cards.forEach((c) => io.observe(c.el));
+
+  const apply = () => {
+    raf = 0;
+    let moving = false;
+
+    cards.forEach((card) => {
+      if (!card.visible) {
+        card.tx = 0;
+        card.ty = 0;
+      } else if (pointer.active) {
+        const r = card.el.getBoundingClientRect();
+        const cx = r.left + r.width / 2;
+        const cy = r.top + r.height / 2;
+        const nx = (pointer.x - cx) / Math.max(r.width, 1);
+        const ny = (pointer.y - cy) / Math.max(r.height, 1);
+        const clamp = (v, m) => Math.max(-m, Math.min(m, v));
+        card.ty = clamp(-ny * 14 * card.depth, 10);
+        card.tx = clamp(nx * 16 * card.depth, 12);
       } else {
-        raf = 0;
+        card.tx = 0;
+        card.ty = 0;
       }
-    };
 
-    card.addEventListener("pointerenter", () => {
-      tracking = true;
-      if (!raf) raf = requestAnimationFrame(render);
+      card.rx += (card.tx - card.rx) * 0.14;
+      card.ry += (card.ty - card.ry) * 0.14;
+
+      if (Math.abs(card.rx) > 0.02 || Math.abs(card.ry) > 0.02 ||
+          Math.abs(card.tx - card.rx) > 0.02 || Math.abs(card.ty - card.ry) > 0.02) {
+        moving = true;
+      }
+
+      const z = Math.min(18, (Math.abs(card.rx) + Math.abs(card.ry)) * 0.6);
+      card.el.style.transform =
+        `rotateX(${card.ry.toFixed(2)}deg) rotateY(${card.rx.toFixed(2)}deg) translateZ(${z.toFixed(2)}px)`;
     });
-    card.addEventListener("pointermove", (e) => {
-      const r = card.getBoundingClientRect();
-      const px = (e.clientX - r.left) / r.width - 0.5;
-      const py = (e.clientY - r.top) / r.height - 0.5;
-      tx = px * 14 * depth;
-      ty = -py * 12 * depth;
-    });
-    card.addEventListener("pointerleave", () => {
-      tracking = false;
-      tx = 0;
-      ty = 0;
-      if (!raf) raf = requestAnimationFrame(render);
-    });
+
+    if (moving) raf = requestAnimationFrame(apply);
+  };
+
+  const kick = () => {
+    if (!raf) raf = requestAnimationFrame(apply);
+  };
+
+  const setPointer = (x, y, active) => {
+    pointer.x = x;
+    pointer.y = y;
+    pointer.active = active;
+    kick();
+  };
+
+  window.addEventListener("pointermove", (e) => {
+    setPointer(e.clientX, e.clientY, true);
+  }, { passive: true });
+
+  window.addEventListener("pointerdown", (e) => {
+    setPointer(e.clientX, e.clientY, true);
+  }, { passive: true });
+
+  window.addEventListener("pointerup", () => {
+    // Keep last pose briefly on mouse; ease home on touch lift
+    if (!finePointer) {
+      pointer.active = false;
+      kick();
+    }
+  }, { passive: true });
+
+  window.addEventListener("pointerleave", () => {
+    pointer.active = false;
+    kick();
   });
-}
+
+  // Touch: follow finger while scrolling/dragging without blocking scroll
+  window.addEventListener("touchmove", (e) => {
+    const t = e.touches[0];
+    if (!t) return;
+    setPointer(t.clientX, t.clientY, true);
+  }, { passive: true });
+
+  window.addEventListener("touchend", () => {
+    pointer.active = false;
+    kick();
+  }, { passive: true });
+
+  window.addEventListener("scroll", kick, { passive: true });
+})();
 
 /* ── Projects horizontal rail ── */
 (function initWorkRail() {
@@ -209,180 +282,5 @@ if (finePointer && !reduced) {
     a.addEventListener("click", (e) => {
       if (moved) e.preventDefault();
     });
-  });
-})();
-
-/* ── Ambient Three.js scene (all devices, paused when off-screen) ── */
-(function initScene() {
-  const canvas = document.getElementById("scene3d");
-  if (!canvas || reduced) return;
-
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    antialias: false,
-    alpha: true,
-    powerPreference: "high-performance",
-  });
-  const dprCap = finePointer ? 1.5 : 1.25;
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, dprCap));
-  renderer.setSize(window.innerWidth, window.innerHeight, false);
-  renderer.setClearColor(0x000000, 0);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(
-    45,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    100
-  );
-  camera.position.set(0, 0.2, 7.5);
-
-  const group = new THREE.Group();
-  scene.add(group);
-
-  const orange = new THREE.Color("#ff5a1f");
-  const matte = new THREE.Color("#1a1a1a");
-  const materials = [
-    new THREE.MeshStandardMaterial({
-      color: orange,
-      metalness: 0.35,
-      roughness: 0.35,
-      emissive: orange,
-      emissiveIntensity: 0.18,
-    }),
-    new THREE.MeshStandardMaterial({
-      color: matte,
-      metalness: 0.4,
-      roughness: 0.55,
-    }),
-    new THREE.MeshStandardMaterial({
-      color: "#ff7a45",
-      metalness: 0.2,
-      roughness: 0.35,
-      transparent: true,
-      opacity: 0.45,
-      emissive: orange,
-      emissiveIntensity: 0.08,
-    }),
-  ];
-
-  const forms = [];
-  const geos = [
-    new THREE.CapsuleGeometry(0.28, 1.1, 4, 12),
-    new THREE.CylinderGeometry(0.22, 0.32, 1.4, 16),
-    new THREE.SphereGeometry(0.45, 16, 16),
-    new THREE.TorusGeometry(0.55, 0.08, 8, 32),
-    new THREE.CapsuleGeometry(0.2, 0.8, 4, 10),
-  ];
-
-  for (let i = 0; i < 8; i++) {
-    const mesh = new THREE.Mesh(geos[i % geos.length], materials[i % materials.length]);
-    const angle = (i / 8) * Math.PI * 2;
-    const radius = 1.8 + (i % 4) * 0.45;
-    mesh.position.set(
-      Math.cos(angle) * radius,
-      Math.sin(i * 1.7) * 1.1 + 0.15,
-      Math.sin(angle) * radius - 0.8
-    );
-    mesh.rotation.set(i * 0.3, i * 0.5, i * 0.15);
-    mesh.scale.setScalar(0.55 + (i % 3) * 0.2);
-    group.add(mesh);
-    forms.push({
-      mesh,
-      speed: 0.12 + (i % 5) * 0.04,
-      orbit: radius,
-      phase: angle,
-      bob: 0.22 + (i % 4) * 0.08,
-    });
-  }
-
-  scene.add(new THREE.AmbientLight(0xffffff, 0.25));
-  const key = new THREE.DirectionalLight(0xff5a1f, 1.4);
-  key.position.set(3, 5, 4);
-  scene.add(key);
-  const fill = new THREE.PointLight(0xff7a45, 18, 14, 2);
-  fill.position.set(-1.5, 1.2, 3);
-  scene.add(fill);
-
-  const mouse = { x: 0, y: 0 };
-  if (finePointer) {
-    window.addEventListener("pointermove", (e) => {
-      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = (e.clientY / window.innerHeight) * 2 - 1;
-    }, { passive: true });
-  }
-
-  let scrollY = 0;
-  window.addEventListener("scroll", () => { scrollY = window.scrollY; }, { passive: true });
-
-  let t = 0;
-  let rafId = 0;
-  let running = false;
-  const intro = document.getElementById("intro");
-
-  function frame() {
-    if (!running) return;
-    t += 0.008;
-    forms.forEach((f, i) => {
-      f.phase += 0.0015 * f.speed;
-      f.mesh.position.x = Math.cos(f.phase) * f.orbit;
-      f.mesh.position.z = Math.sin(f.phase) * f.orbit - 1.2;
-      f.mesh.position.y =
-        Math.sin(t * f.speed + i) * f.bob + Math.cos(t * 0.4 + i) * 0.15;
-      f.mesh.rotation.x += 0.004 * f.speed;
-      f.mesh.rotation.y += 0.006 * f.speed;
-    });
-
-    group.rotation.y = mouse.x * 0.25 + scrollY * 0.00025;
-    group.rotation.x = mouse.y * -0.12 + scrollY * 0.0001;
-    camera.position.x += (mouse.x * 0.4 - camera.position.x) * 0.04;
-    camera.position.y += (-mouse.y * 0.25 + 0.2 - camera.position.y) * 0.04;
-    camera.lookAt(0, 0, -1);
-
-    renderer.render(scene, camera);
-    rafId = requestAnimationFrame(frame);
-  }
-
-  const start = () => {
-    if (running || document.hidden) return;
-    running = true;
-    canvas.style.visibility = "visible";
-    rafId = requestAnimationFrame(frame);
-  };
-  const stop = () => {
-    running = false;
-    cancelAnimationFrame(rafId);
-    canvas.style.visibility = "hidden";
-  };
-
-  if (intro) {
-    new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !document.hidden) start();
-        else stop();
-      },
-      { threshold: 0.05 }
-    ).observe(intro);
-  } else {
-    start();
-  }
-
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) stop();
-    else if (intro) {
-      const r = intro.getBoundingClientRect();
-      if (r.bottom > 0 && r.top < window.innerHeight) start();
-    } else start();
-  });
-
-  let resizeTimer = 0;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, dprCap));
-      renderer.setSize(window.innerWidth, window.innerHeight, false);
-    }, 120);
   });
 })();

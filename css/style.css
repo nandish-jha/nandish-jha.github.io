@@ -84,9 +84,7 @@ a:hover { color: var(--copper-soft); }
 .stage-bloom {
   position: absolute;
   border-radius: 50%;
-  /* Soft edge via gradient only — avoids filter: blur() jank */
   mix-blend-mode: screen;
-  will-change: transform;
 }
 .stage-bloom-a {
   width: min(90vw, 900px);
@@ -94,7 +92,7 @@ a:hover { color: var(--copper-soft); }
   top: -5%;
   right: -5%;
   background: radial-gradient(circle, rgba(255, 90, 31, 0.32) 0%, rgba(255, 90, 31, 0.1) 28%, transparent 62%);
-  animation: bloom-a 16s ease-in-out infinite alternate;
+  opacity: 0.85;
 }
 .stage-bloom-b {
   width: min(70vw, 640px);
@@ -102,15 +100,7 @@ a:hover { color: var(--copper-soft); }
   bottom: -8%;
   left: -10%;
   background: radial-gradient(circle, rgba(255, 90, 31, 0.14) 0%, transparent 60%);
-  animation: bloom-b 20s ease-in-out infinite alternate;
-}
-@keyframes bloom-a {
-  from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.7; }
-  to { transform: translate3d(-3%, 4%, 0) scale(1.08); opacity: 1; }
-}
-@keyframes bloom-b {
-  from { transform: translate3d(0, 0, 0) scale(1); opacity: 0.5; }
-  to { transform: translate3d(4%, -3%, 0) scale(1.1); opacity: 0.85; }
+  opacity: 0.7;
 }
 .stage-fog {
   position: absolute;
@@ -125,15 +115,21 @@ a:hover { color: var(--copper-soft); }
   background: radial-gradient(ellipse 75% 70% at 50% 45%, transparent 30%, rgba(0,0,0,0.75) 100%);
 }
 
-#scene3d {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.9;
-  contain: strict;
+#scene3d { display: none !important; }
+
+/* Perspective pan cards (driven by JS — mouse + finger) */
+.story-rail,
+.craft-grid,
+.work-list,
+.elsewhere-row,
+.connect-list,
+.life {
+  perspective: 1200px;
+}
+.tilt {
+  transform-style: preserve-3d;
+  transform: rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0);
+  will-change: transform;
 }
 
 /* Right-side section rail — bare vertical line + dots */
@@ -484,7 +480,7 @@ main { position: relative; z-index: 1; padding-top: 28px; }
   -webkit-backdrop-filter: var(--glass-blur);
   box-shadow: var(--glass-shadow);
   transform-style: preserve-3d;
-  transition: box-shadow 0.4s var(--ease), border-color 0.35s var(--ease), transform 0.35s var(--ease);
+  transition: box-shadow 0.4s var(--ease), border-color 0.35s var(--ease);
 }
 .story-card:hover,
 .craft-card:hover,
@@ -678,7 +674,7 @@ main { position: relative; z-index: 1; padding-top: 28px; }
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   padding: 12px 40px 28px;
-  perspective: none;
+  perspective: 1200px;
   cursor: grab;
   scrollbar-width: thin;
   scrollbar-color: var(--copper) transparent;
@@ -709,7 +705,7 @@ main { position: relative; z-index: 1; padding-top: 28px; }
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   box-shadow: var(--glass-shadow);
-  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
   position: relative;
   overflow: hidden;
   text-decoration: none;
@@ -725,7 +721,6 @@ main { position: relative; z-index: 1; padding-top: 28px; }
 }
 .work-item:hover {
   border-color: rgba(255, 90, 31, 0.45);
-  transform: translateY(-6px);
   box-shadow: 0 24px 60px rgba(0,0,0,0.45), 0 0 40px var(--glow);
   color: inherit;
 }
@@ -820,11 +815,7 @@ main { position: relative; z-index: 1; padding-top: 28px; }
   border-radius: 50%;
   background: radial-gradient(circle, rgba(255, 90, 31, 0.35), transparent 70%);
   pointer-events: none;
-  animation: life-orb 8s ease-in-out infinite alternate;
-}
-@keyframes life-orb {
-  from { transform: translate(0, 0) scale(1); }
-  to { transform: translate(-30px, -20px) scale(1.15); }
+  opacity: 0.85;
 }
 .life-feature {
   display: none;
@@ -898,7 +889,7 @@ main { position: relative; z-index: 1; padding-top: 28px; }
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   box-shadow: var(--glass-shadow);
-  transition: transform 0.35s var(--ease), border-color 0.3s, box-shadow 0.3s;
+  transition: border-color 0.3s, box-shadow 0.3s;
   overflow: hidden;
   position: relative;
 }
@@ -908,7 +899,6 @@ main { position: relative; z-index: 1; padding-top: 28px; }
     var(--glass-bg);
 }
 .elsewhere-poster:hover {
-  transform: translateY(-10px) rotate(-0.5deg);
   border-color: rgba(255, 90, 31, 0.45);
   box-shadow: 0 28px 60px rgba(0,0,0,0.45), 0 0 40px var(--glow);
   color: inherit;

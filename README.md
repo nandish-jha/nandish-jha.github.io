@@ -9,7 +9,7 @@ Theme: matte black + orange, cinematic depth, scroll reveals, and ambient 3D.
 ```
 index.html        page content
 css/style.css     design tokens + layout
-js/main.js        CONFIG, scroll/tilt motion, Three.js scene
+js/main.js        CONFIG, scroll, section rail, perspective pan
 assets/           Nandish_Jha_Resume.pdf
 blog/             public blog + admin desk
 .nojekyll         GitHub Pages serves files as-is
