@@ -67,6 +67,78 @@ tilts.forEach((card) => {
   });
 });
 
+/* ── Projects horizontal rail ── */
+(function initWorkRail() {
+  const list = document.getElementById("workList");
+  const prev = document.getElementById("workPrev");
+  const next = document.getElementById("workNext");
+  if (!list || !prev || !next) return;
+
+  const step = () => {
+    const card = list.querySelector(".work-item");
+    return card ? card.getBoundingClientRect().width + 20 : 400;
+  };
+
+  const updateButtons = () => {
+    const max = list.scrollWidth - list.clientWidth - 4;
+    prev.disabled = list.scrollLeft <= 4;
+    next.disabled = list.scrollLeft >= max;
+  };
+
+  prev.addEventListener("click", () => {
+    list.scrollBy({ left: -step(), behavior: "smooth" });
+  });
+  next.addEventListener("click", () => {
+    list.scrollBy({ left: step(), behavior: "smooth" });
+  });
+  list.addEventListener("scroll", updateButtons, { passive: true });
+  window.addEventListener("resize", updateButtons);
+  updateButtons();
+
+  // Convert vertical wheel to horizontal when hovering the rail
+  list.addEventListener(
+    "wheel",
+    (e) => {
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+      if (list.scrollWidth <= list.clientWidth) return;
+      e.preventDefault();
+      list.scrollLeft += e.deltaY;
+    },
+    { passive: false }
+  );
+
+  // Drag to scroll (desktop)
+  let down = false;
+  let startX = 0;
+  let startLeft = 0;
+  let moved = false;
+
+  list.addEventListener("pointerdown", (e) => {
+    if (e.pointerType === "touch") return;
+    down = true;
+    moved = false;
+    startX = e.clientX;
+    startLeft = list.scrollLeft;
+    list.setPointerCapture(e.pointerId);
+  });
+  list.addEventListener("pointermove", (e) => {
+    if (!down) return;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 6) moved = true;
+    list.scrollLeft = startLeft - dx;
+  });
+  const endDrag = () => { down = false; };
+  list.addEventListener("pointerup", endDrag);
+  list.addEventListener("pointercancel", endDrag);
+
+  // Don't follow link if user was dragging
+  list.querySelectorAll(".work-item").forEach((a) => {
+    a.addEventListener("click", (e) => {
+      if (moved) e.preventDefault();
+    });
+  });
+})();
+
 /* ── Ambient Three.js scene ── */
 (function initScene() {
   const canvas = document.getElementById("scene3d");
