@@ -82,28 +82,23 @@ body {
   }
   .cursor-inner {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 12px;
-    transform: translate(0, 0);
+    transform: translate(-5px, -5px);
   }
-  .cursor-pointer {
-    width: 14px;
-    height: 18px;
+  .cursor-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--copper);
     flex-shrink: 0;
-    overflow: visible;
-    transition: transform 0.18s var(--ease);
+    transition: transform 0.18s var(--ease), background 0.18s ease;
   }
-  .cursor-pointer-shape {
-    fill: var(--copper);
-  }
-  .cursor.is-hover .cursor-pointer {
-    transform: scale(1.15);
-  }
-  .cursor.is-hover .cursor-pointer-shape {
-    fill: var(--copper-soft);
+  .cursor.is-hover .cursor-dot {
+    transform: scale(1.35);
+    background: var(--copper-soft);
   }
   .cursor-label {
-    margin-top: 0;
     font-family: var(--mono);
     font-size: 11px;
     font-weight: 500;
