@@ -83,12 +83,12 @@ body {
   .cursor-inner {
     display: flex;
     align-items: center;
-    gap: 12px;
-    transform: translate(-5px, -5px);
+    gap: 13px;
+    transform: translate(-6px, -6px);
   }
   .cursor-dot {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     background: var(--copper);
     flex-shrink: 0;
@@ -100,7 +100,7 @@ body {
   }
   .cursor-label {
     font-family: var(--mono);
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -1343,42 +1343,305 @@ main { position: relative; z-index: 1; padding-top: 12px; }
 
 /* Responsive */
 @media (max-width: 960px) {
-  .resume-float { padding: 11px 16px; font-size: 13px; }
-  .panel, .intro, .story {
-    padding-left: 20px;
-    padding-right: 20px;
+  .resume-float { padding: 10px 14px; font-size: 12px; }
+  .panel {
+    padding: 64px 22px;
   }
-  .story { grid-template-columns: 1fr; }
-  .story-sticky { position: relative; top: 0; margin-bottom: 32px; }
+  .panel, .intro, .story {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+  .panel-head { margin-bottom: 28px; }
+  .section-display { font-size: clamp(30px, 7vw, 48px); }
+  .story { grid-template-columns: 1fr; gap: 28px; }
+  .story-sticky { position: relative; top: 0; margin-bottom: 8px; }
   .craft-ledger { grid-template-columns: 1fr; }
   .elsewhere-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
   }
   .elsewhere-poster {
     aspect-ratio: 1 / 1;
     min-height: 0;
+    padding: 16px 14px;
   }
   .work-head {
     flex-direction: column;
     align-items: flex-start;
-    padding: 0 20px;
-    margin-bottom: 28px;
+    padding: 0 22px;
+    margin-bottom: 20px;
   }
   .work-list {
-    padding: 8px 20px 24px;
-    gap: 16px;
+    padding: 8px 22px 20px;
+    gap: 14px;
   }
   .work-item {
-    flex-basis: min(86vw, 340px);
-    min-height: 380px;
-    padding: 24px;
+    flex-basis: min(78vw, 300px);
+    min-height: 320px;
+    padding: 18px;
   }
   .work-controls { padding-bottom: 0; }
-  .display { font-size: clamp(48px, 14vw, 84px); }
+  .display { font-size: clamp(44px, 12vw, 72px); }
+  .site-foot { padding: 24px 22px 36px; }
 }
 
-@media (max-width: 560px) {
-  .elsewhere-row { grid-template-columns: 1fr; gap: 12px; }
-  .elsewhere-poster { padding: 22px 18px; }
-  .elsewhere-poster h3 { font-size: 26px; }
+@media (max-width: 640px) {
+  body { font-size: 15px; line-height: 1.55; }
+  html { scroll-padding-top: 16px; }
+
+  .resume-float {
+    top: max(10px, env(safe-area-inset-top, 0px) + 8px);
+    right: max(10px, env(safe-area-inset-right, 0px) + 8px);
+    padding: 8px 12px;
+    font-size: 11px;
+  }
+
+  .panel {
+    padding: 48px 16px;
+  }
+  .panel, .intro, .story {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .work {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .panel-head { margin-bottom: 22px; }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    margin-bottom: 10px;
+  }
+  .panel-lede {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .section-display {
+    font-size: clamp(26px, 8.5vw, 36px);
+    line-height: 1;
+  }
+
+  .intro {
+    min-height: 100svh;
+    padding-top: 56px;
+    padding-bottom: 48px;
+    justify-content: center;
+  }
+  .display {
+    font-size: clamp(40px, 11vw, 52px);
+    margin: 6px 0 14px;
+    letter-spacing: -0.04em;
+  }
+  .lede {
+    font-size: 15px;
+    margin-bottom: 20px;
+    max-width: 22rem;
+  }
+  .intro-actions {
+    gap: 8px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 20rem;
+  }
+  .intro-actions .btn {
+    flex: 1 1 auto;
+    min-width: calc(50% - 4px);
+    padding: 11px 14px;
+    font-size: 12px;
+  }
+  .meta-row {
+    font-size: 11px;
+    gap: 8px;
+    letter-spacing: 0.08em;
+  }
+  .btn {
+    padding: 11px 16px;
+    font-size: 13px;
+  }
+
+  .story-rail { gap: 14px; }
+  .story-card {
+    padding: 18px;
+    border-radius: 16px;
+  }
+  .story-card h3 {
+    font-size: 22px;
+    margin: 8px 0 8px;
+  }
+  .story-card p,
+  .focus-list li {
+    font-size: 14px;
+  }
+  .focus-list { gap: 10px; }
+  .focus-list li { gap: 10px; padding-bottom: 10px; }
+  .focus-list em { font-size: 12px; min-width: 64px; }
+  .card-num { font-size: 11px; }
+
+  .tag-row { gap: 6px; margin-top: 14px; }
+  .tag-row span {
+    font-size: 11px;
+    padding: 5px 9px;
+  }
+
+  .craft-rail { border-radius: 18px; }
+  .craft-rail-head { padding: 16px 16px 14px; }
+  .craft-rail-head h3 { font-size: 24px; }
+  .craft-rail-head p { font-size: 13px; }
+  .craft-rail-num { font-size: 11px; margin-bottom: 6px; }
+  .craft-row { padding: 14px 16px; }
+  .craft-row-copy h4 { font-size: 16px; }
+  .craft-row-copy p {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+  .craft-bridge {
+    margin-top: 16px;
+    gap: 8px 12px;
+    padding: 14px 16px;
+    font-size: 13px;
+    border-radius: 14px;
+  }
+  .craft-bridge span { font-size: 11px; }
+
+  .work-head {
+    padding: 0 16px;
+    margin-bottom: 16px;
+  }
+  .work-list {
+    padding: 4px 16px 16px;
+    gap: 12px;
+  }
+  .work-item {
+    flex-basis: min(82vw, 280px);
+    min-height: 280px;
+    padding: 16px;
+    border-radius: 16px;
+  }
+  .work-idx {
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  .work-item h3 { font-size: 20px; }
+  .work-item > p { font-size: 13px; }
+  .work-go {
+    margin-top: 16px;
+    font-size: 12px;
+  }
+  .work-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .life-intro { margin-bottom: 22px; }
+  .life-reel {
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .life-track {
+    gap: 8px;
+    padding: 9px 12px;
+    font-size: 12px;
+  }
+  .life-stage {
+    min-height: 220px;
+    padding: 20px 16px;
+    border-radius: 18px;
+  }
+  .life-orb {
+    width: 180px;
+    height: 180px;
+  }
+  .life-kicker {
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+  .life-feature h3 {
+    font-size: clamp(22px, 7vw, 28px);
+    margin-bottom: 10px;
+  }
+  .life-feature > p {
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+  .life-chip {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+  .life-link { font-size: 13px; }
+
+  .card-art {
+    min-height: 72px;
+    margin-top: 12px;
+    border-radius: 12px;
+  }
+  .craft-card .card-art,
+  .work-item .card-art {
+    min-height: 64px;
+    margin-top: 12px;
+  }
+  .art-dual { min-height: 72px; }
+  .art-dual .art-half { font-size: 22px; }
+  .art-focus { padding: 12px; gap: 8px; }
+  .art-pill {
+    font-size: 10px;
+    padding: 6px 9px;
+  }
+  .art-shop .art-price { font-size: 40px; }
+
+  .elsewhere-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .elsewhere-poster {
+    padding: 12px 10px;
+    border-radius: 14px;
+  }
+  .elsewhere-kicker {
+    font-size: 10px;
+    margin-bottom: 6px;
+    letter-spacing: 0.1em;
+  }
+  .elsewhere-poster h3 {
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  .elsewhere-poster > p {
+    font-size: 11px;
+    line-height: 1.4;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .elsewhere-poster .card-art {
+    min-height: 64px;
+    margin: 0 0 10px;
+  }
+  .elsewhere-go { font-size: 11px; }
+
+  .connect { min-height: auto; }
+  .connect-list { margin-top: 28px; }
+  .connect-link {
+    padding: 16px 4px;
+    font-size: clamp(20px, 6.5vw, 28px);
+  }
+  .connect-arrow { font-size: 20px; }
+
+  .site-foot {
+    padding: 20px 16px 32px;
+    font-size: 12px;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .intro-actions .btn {
+    min-width: 100%;
+  }
+  .display { font-size: clamp(36px, 12vw, 44px); }
+  .elsewhere-poster h3 { font-size: 14px; }
 }

@@ -1,16 +1,174 @@
 {
   "posts": [
     {
-      "id": "welcome-to-the-lab",
-      "title": "Welcome to the lab",
-      "date": "2026-09-04",
+      "id": "first-post-how-this-blog-works",
+      "title": "First post: starting the blog, and how these posts get written",
+      "date": "2026-09-08",
       "category": "story",
-      "tags": [
-        "intro"
-      ],
-      "excerpt": "Stories, tech notes, and project logs — written in public, edited when the compile finishes.",
+      "tags": ["meta", "ai", "intro"],
+      "excerpt": "I needed this blog to exist while I focus on job search, school, and skills. Early project posts were drafted with AI from my repos. Going forward, I write — AI helps.",
       "published": true,
-      "body": "## Why this exists\n\nThis blog is my public notebook: **stories**, **thoughts**, **new tech**, and **project logs** — things I've shipped, things I'm building, and things still living in the backlog.\n\nExpect a mix of Hardware and Software, occasional weekend tangents that somehow turn into something more in-depth.\n\n## How it works\n\nPosts live as structured data on this site. I write them from the admin desk when something is worth saying out loud.\n\nIf you're here from the portfolio — welcome. Stay for the builds and brain-matter."
+      "body": "## Why this exists now\n\nI have been a student for longer than I am comfortable with. The next step is clear: become someone who can stand in interviews with real confidence — not just coursework completed, but work I can explain end to end.\n\nThat means a lot of parallel tracks at once: job search, staying ahead academically, keeping skills sharp, shipping side projects, and training at the gym where progress is small and measurable. When everything runs in parallel, something always waits. For a while, this blog was that something.\n\nI am starting it properly today.\n\n## About AI and these early posts\n\nI do not have time right now to hand-write a full retrospective for every past project. The archive would stay empty, and empty does not help anyone — including future me preparing for interviews.\n\nSo: **some of these early project posts were drafted with AI**, using my GitHub repositories, READMEs, and portfolio as the source material. I am responsible for what gets published. The facts should match the repos. If something is wrong, I will correct it.\n\n**Future posts will be written by me**, with AI used for guidance — structure, clarity, \"did I explain this in a way a non-specialist can follow.\" The judgment calls and the \"what I would redo\" sections are mine.\n\n## How I will try to write\n\nTechnical enough to be useful. Analogies when the idea is dense, so someone outside the field can still follow the shape of the problem. Low on jokes. High on what broke, what I would change, and what the project taught me.\n\nIf you are here from the portfolio: start with a project that matches the role you care about. The code is on [GitHub](https://github.com/nandish-jha). This blog is the explanation layer."
+    },
+    {
+      "id": "hardware-software-same-desk",
+      "title": "Hardware and software on the same desk",
+      "date": "2026-09-03",
+      "category": "tech",
+      "tags": ["hardware", "software", "career"],
+      "excerpt": "I do not pick one side of the stack. Verification one week, product or embedded the next — and that combination is intentional.",
+      "published": true,
+      "body": "## Both sides, same engineer\n\nPeople often ask me to choose: silicon or software. I do not treat those as opposite careers.\n\nOne stretch of work might be a constrained-random UVM testbench and coverage closure. Another might be a Kotlin Android product, a Dockerized web app, or a board on the bench with sensors and a display.\n\n### Analogy\n\nThink of a building. Software-only work is like designing the elevators and the apps people use in the lobby. Hardware-only work is like designing the wiring and the load-bearing walls. I want to understand both, because failures show up at the joints — timing, power, latency, interfaces — not only in the pretty parts.\n\n### What that gives me\n\n- Better instincts about where bugs actually live\n- Respect for physical limits: clocks, memory, batteries, networks\n- Products and labs that feel like systems, not demos\n\nThat overlap is also how I am trying to move from \"long-time student\" to someone who can explain tradeoffs clearly in an interview."
+    },
+    {
+      "id": "xswitch-verification",
+      "title": "Xswitch verification: finding switch bugs in simulation",
+      "date": "2026-09-07",
+      "category": "project",
+      "tags": ["SystemVerilog", "UVM", "verification"],
+      "excerpt": "A UVM-style SystemVerilog testbench for an Xswitch — constrained-random stimulus, structured interfaces, regression before anyone trusts silicon.",
+      "published": true,
+      "body": "## What it is\n\n[xswitch-verification](https://github.com/nandish-jha/xswitch-verification) is a SystemVerilog verification environment around an Xswitch DUT (device under test). The job of the bench is to stress the design in simulation so bad behavior shows up before hardware is trusted.\n\n## Stack\n\n- SystemVerilog\n- UVM-style structure: interface, sequencer, package, DUT top, testbench top\n- Scripts for regression under `script/`\n\n## Analogy\n\nA switch is like a mail sorting room. Packets (mail) arrive on one port and must leave on the correct port, intact. Verification is hiring inspectors who throw thousands of random letters through the room — different sizes, wrong addresses, bursts of traffic — and check that nothing is lost, duplicated, or sent to the wrong chute. Directed tests are a few letters you wrote by hand. Constrained-random is the industrial hose.\n\n## What the repo contains\n\n- DUT: `xswitch.svp`\n- Verification: `interface.sv`, `sequencer.sv`, `lab4_pkg.sv`, top-level testbench files\n- Regression runner scripts\n\n## What I would redo\n\nI would document coverage goals and known bug classes in the README the same day the bench runs green — not later. Interview-ready work needs a clear story: what was checked, what was not, and what failed first. I would also add a short \"how to run\" path so a stranger can reproduce a regression without guessing tool setup.\n\n## Takeaway\n\nVerification is where I am most comfortable on the hardware side: define the contract, attack it with stimulus, measure what you covered, close holes. RTL without a bench is unfinished work.\n\n**Repo:** [nandish-jha/xswitch-verification](https://github.com/nandish-jha/xswitch-verification)"
+    },
+    {
+      "id": "full-microprocessor-fpga",
+      "title": "Building a 4-bit microprocessor in Verilog for FPGA",
+      "date": "2026-09-07",
+      "category": "project",
+      "tags": ["Verilog", "FPGA", "RTL", "Quartus"],
+      "excerpt": "Program memory, data memory, sequencer, compute unit, instruction decoder — then synthesis and bring-up on FPGA.",
+      "published": true,
+      "body": "## What it is\n\n[full_microprocessor](https://github.com/nandish-jha/full_microprocessor) is a 4-bit microprocessor written in Verilog and targeted at FPGA implementation. The Quartus project files and supporting hex/program artifacts are in the repository.\n\n## Major blocks\n\n- Program memory — where instructions live\n- Data memory — where working values live\n- Program sequencer — which instruction runs next\n- Computational unit — arithmetic and logic\n- Instruction decoder — turns bits into control signals\n\n## Analogy\n\nA CPU is a kitchen line. The program memory is the recipe book. The decoder is the head chef reading each line and telling stations what to do. The computational unit is the stove. The sequencer is the ticket rail that decides which order is next. If any station misunderstands the ticket, the plate that comes out is wrong — even if every station is \"working.\"\n\nFour bits keeps the datapath small so you can watch a single instruction walk through the machine without drowning in width.\n\n## What I would redo\n\nI would keep a cleaner separation between simulation testbenches and board bring-up notes, and I would write a minimal instruction set summary in the README (opcodes, what each does, reset behavior). Backup `.bak` files and scattered waveform notes are useful while building; they are noise when someone else opens the repo. I would also checkpoint one \"known good\" program image with expected outputs.\n\n## Takeaway\n\nSmall bit-width, large learning. Naming every block forced me to understand fetch, decode, and execute as real wires and enables — not slide-deck boxes.\n\n**Repo:** [nandish-jha/full_microprocessor](https://github.com/nandish-jha/full_microprocessor)"
+    },
+    {
+      "id": "nest-hub-on-lcd",
+      "title": "Nest Hub–style display on Raspberry Pi 4",
+      "date": "2026-09-06",
+      "category": "project",
+      "tags": ["Python", "Raspberry Pi", "embedded"],
+      "excerpt": "A local smart-display style system on Pi 4: Python UI, LCD driver, temperature and humidity on real hardware.",
+      "published": true,
+      "body": "## What it is\n\n[nest_hub_on_LCD](https://github.com/nandish-jha/nest_hub_on_LCD) is a Nest Hub–like system on a Raspberry Pi 4. It is intentionally low-tech and local: Python application code, an LCD driver path, and temperature/humidity reading.\n\n## Analogy\n\nA commercial smart display is a finished appliance. This project is closer to building a dashboard clock from parts on a workbench. Same idea — information on a screen in a room — but you own every cable between the computer, the display, and the sensor.\n\n## What matters in practice\n\nEmbedded work only counts when the display updates and the sensor values move. A mock UI on a laptop can look finished and still hide driver, timing, and wiring problems.\n\n## What I would redo\n\nI would add a short hardware bill of materials and pin map in the README, plus a boot checklist (display init, sensor read, main UI loop). I would also separate \"driver experiments\" from \"the app people should run,\" so the entry point is obvious.\n\n## Takeaway\n\nPi projects close the loop between OS, Python, drivers, and a physical UI. That loop is the same habit you need on larger embedded systems — just with a friendlier toolchain.\n\n**Repo:** [nandish-jha/nest_hub_on_LCD](https://github.com/nandish-jha/nest_hub_on_LCD)"
+    },
+    {
+      "id": "prodash",
+      "title": "ProDash: a local productivity dashboard for AMOLED",
+      "date": "2026-09-06",
+      "category": "project",
+      "tags": ["Kotlin", "Android", "PWA", "product"],
+      "excerpt": "Tasks, habits, budget, workouts, supplements, notes — shipped as a PWA and Android APK, biased toward local storage and a black OLED screen.",
+      "published": true,
+      "body": "## What it is\n\n[ProDash](https://github.com/nandish-jha/boop-app) (repository: `boop-app`) is a personal productivity dashboard: tasks, habits, budget, workouts, supplements, notes. It ships as a PWA and an Android APK. The product bias is local-first storage and a UI that reads well on an AMOLED black screen.\n\n## Analogy\n\nMost productivity apps are rented storage units in the cloud. ProDash is closer to a notebook you keep on your desk: the pages are yours, the structure is yours, and the tool should not need a meeting with a server to show today.\n\nAMOLED is unforgiving. Light UI chrome wastes battery and attention. Dark, dense layouts make weak information hierarchy obvious.\n\n## What is in the repo\n\n- Android app path (`app/`, Gradle, release scripts)\n- Web / PWA path (`web/`, prototype and hosting hooks)\n\n## What I would redo\n\nI would define a smaller \"v1 surface\" earlier — fewer modules, stronger defaults — and write down the data model in one place before adding another tracker. Feature sprawl is easy when you are building for yourself. I would also make the relationship between PWA and Android clearer in the README (what is shared, what is native-only).\n\n## Takeaway\n\nProduct work is deciding what does *not* get a tile on the home screen. Clarity beats completeness when you open the app every morning.\n\n**Repo:** [nandish-jha/boop-app](https://github.com/nandish-jha/boop-app)"
+    },
+    {
+      "id": "discord-light",
+      "title": "Discord Light: a containerized chat web app",
+      "date": "2026-09-05",
+      "category": "project",
+      "tags": ["JavaScript", "React", "Docker", "SQL"],
+      "excerpt": "React front end, SQL backend, Docker Compose — a lighter social web app you can stand up as a stack, not only as a screenshot.",
+      "published": true,
+      "body": "## What it is\n\n[discord_light_chat_web_app](https://github.com/nandish-jha/discord_light_chat_web_app) is a Discord-style web socializing platform built lighter: React front end, SQL backend, Docker Compose to run the pieces together.\n\nDemo walkthrough: [YouTube](https://youtu.be/FvkkL5Y97EM?si=2ErQmTYUfPrUrFDl).\n\n## Analogy\n\nA chat app is a post office with live windows. The front end is the counter where people talk. The database is the filing room. Docker Compose is the building manager who starts the counter and the filing room on the same schedule so neither is waiting on a mystery setup on someone else's laptop.\n\n## Structure\n\n- `react-front` — UI\n- `sqldb-back` — data side\n- `docker-compose.yml` — bring the stack up together\n\n## What I would redo\n\nI would document environment variables, ports, and a fresh-clone runbook in the top-level README on day one. I would also add a minimal automated smoke test that proves \"compose up → health → send a message\" so regressions are not discovered only by hand.\n\n## Takeaway\n\nFull-stack work is interfaces between processes: schemas, ports, sockets, restart behavior. If another person cannot run it, the project is incomplete.\n\n**Repo:** [nandish-jha/discord_light_chat_web_app](https://github.com/nandish-jha/discord_light_chat_web_app)"
+    },
+    {
+      "id": "loglens-perl",
+      "title": "LogLens: parsing logs in Perl and ranking repeated errors",
+      "date": "2026-09-05",
+      "category": "project",
+      "tags": ["Perl", "CLI", "logs", "testing"],
+      "excerpt": "A CLI that classifies log lines, extracts timestamps, and surfaces the error messages that appear most often.",
+      "published": true,
+      "body": "## What it is\n\n[LogLens](https://github.com/nandish-jha/LogLens) is a command-line log analysis tool written in Perl. It reads a log file, detects severity levels, extracts timestamps, and prints a summary — including the most frequent error messages.\n\n## Analogy\n\nA raw log file is a security camera that never sleeps: hours of footage, most of it normal. LogLens is a first pass that labels each clip (info, warning, error, and so on), notes the time, and then tells you which error scenes repeat. That ranking matters more than reading line 40,000 by eye.\n\n## Design\n\n- `bin/loglens.pl` — CLI and flags\n- `lib/LogLens.pm` — parsing module (POD documented)\n- `t/classify.t` — Test::More tests\n\nSupported levels include INFO, WARN, ERROR, DEBUG, FATAL. Malformed lines become `UNKNOWN` / `NO_TIMESTAMP` instead of crashing the run. Useful flags: `--verbose`, `--top-errors=N`.\n\n## What I would redo\n\nI would add JSON output next, so the tool can feed other scripts without fragile text scraping. I would also support a configurable timestamp pattern earlier — real logs are rarely one format.\n\n## Takeaway\n\nSmall tools should be modular and tested. Ranking repeated failures is a practical debugging habit, not just a feature checkbox.\n\n**Repo:** [nandish-jha/LogLens](https://github.com/nandish-jha/LogLens)"
+    },
+    {
+      "id": "now-android-overlay",
+      "title": "Now: an Android overlay that interrupts distraction",
+      "date": "2026-09-04",
+      "category": "project",
+      "tags": ["Kotlin", "Android", "wellbeing", "privacy"],
+      "excerpt": "When a distracting app or site is open, Now shows a blurred pause — local only, no internet permission — toward a calmer phone.",
+      "published": true,
+      "body": "## What it is\n\n[Now](https://github.com/nandish-jha/Now) is an Android wellbeing overlay. When a distracting app or site is in the foreground, it places a pause on screen: a short reminder, and buttons into focus apps you choose. Snooze exists for cases where you genuinely need the blocked thing for a couple of minutes.\n\nThe longer direction is a calmer phone: fewer paths into noise, and eventually a home screen that behaves more like a limited device, with the overlay as a backstop.\n\n## Analogy\n\nThink of a locked medicine cabinet with a note on the door. You can still open it, but you must pass through an intentional pause. Now is that pause for apps and sites you already marked as distracting.\n\n## Privacy constraints\n\n- Usage access to know which app is foreground\n- Optional Accessibility limited to address bar / private-browsing indicators — not keystrokes, not page content\n- No internet permission; preferences stay on device\n\nThose limits are product requirements, not afterthoughts. Store review and user trust both depend on them.\n\n## What I would redo\n\nI would ship a narrower first release with fewer toggles and a clearer onboarding order (overlay permission → usage access → optional site detection). I would also write the Play policy explanations while the code is still small, so the Accessibility declaration never drifts from what the service actually does.\n\n## Takeaway\n\nThis project sits at the intersection of product judgment and systems constraints: permissions, foreground services, and a UI that interrupts without becoming invasive.\n\n**Repo:** [nandish-jha/Now](https://github.com/nandish-jha/Now)"
+    },
+    {
+      "id": "low-tech-iv-pump",
+      "title": "Low-tech IV pump: firmware for constrained environments",
+      "date": "2026-09-02",
+      "category": "project",
+      "tags": ["Python", "MicroPython", "embedded"],
+      "excerpt": "A low-cost IV pump concept — motor, display, numpad, buzzer — where control correctness matters more than features.",
+      "published": true,
+      "body": "## What it is\n\n[low-tech-iv-pump](https://github.com/nandish-jha/low-tech-iv-pump) is a low-cost IV pump project aimed at resource-constrained settings. The firmware side is organized around motor, display, numpad, and buzzer modules with a main entry point.\n\n## Analogy\n\nAn IV pump is a metronome attached to a valve. The user sets a rate; the machine must keep time and move fluid in a controlled way. If the metronome drifts, the clinical idea fails even if the screen looks fine. That is why input, feedback (display/buzzer), and actuation are separate concerns in the code.\n\n## What I would redo\n\nI would specify safety assumptions in writing: what the prototype is and is not, alarm behavior, and what happens on invalid keypad input. I would also add a simple state diagram (idle → set rate → running → alarm) before growing module code.\n\n## Takeaway\n\nNot every embedded project is a convenience gadget. When actuation affects the physical world, clarity and failure modes come first.\n\n**Repo:** [nandish-jha/low-tech-iv-pump](https://github.com/nandish-jha/low-tech-iv-pump)"
+    },
+    {
+      "id": "space-booker",
+      "title": "Space Booker: campus table booking in JavaFX",
+      "date": "2026-09-02",
+      "category": "project",
+      "tags": ["Java", "JavaFX"],
+      "excerpt": "A Java/JavaFX application for student groups booking tables and spaces across campus locations.",
+      "published": true,
+      "body": "## What it is\n\n[space-booker](https://github.com/nandish-jha/space-booker) is a Java / JavaFX application that helps student groups book tables and spaces in different campus locations.\n\n## Analogy\n\nWithout a booking system, campus space is a shared whiteboard that everyone edits in group chats. Collisions are discovered when two teams arrive at the same table. A booking app is a reservation sheet with rules: who, where, when — visible before anyone walks across campus.\n\n## What I would redo\n\nI would define conflict rules explicitly (overlap policy, cancellation, who can edit a booking) and add sample data for a demo walkthrough. Desktop apps need a five-minute story for reviewers and interviewers.\n\n## Takeaway\n\nCoordination problems are data-model problems. The UI is how people see the rules; the rules are the product.\n\n**Repo:** [nandish-jha/space-booker](https://github.com/nandish-jha/space-booker)"
+    },
+    {
+      "id": "reaction-game-rpi",
+      "title": "Two-player reaction game on Raspberry Pi",
+      "date": "2026-09-01",
+      "category": "project",
+      "tags": ["Python", "Raspberry Pi", "embedded"],
+      "excerpt": "LCD says go at a random time; two players, push-buttons, fastest press wins the round.",
+      "published": true,
+      "body": "## What it is\n\n[reaction_game](https://github.com/nandish-jha/reaction_game) is a two-player reaction game on Raspberry Pi 4. Players have push-buttons. At a random time the LCD shows a go signal; the fastest valid press wins the round.\n\n## Analogy\n\nIt is a hardware version of a starting pistol. The system must wait a hidden delay, announce the start, and judge who reacted first. If the announce and the input sampling disagree about time, the winner is wrong — which players notice immediately.\n\n## What I would redo\n\nI would treat debounce and false-start rules as first-class requirements, with tests or a logged timing trace for a few rounds. I would also document wiring and which GPIO pins map to which player.\n\n## Takeaway\n\nInteractive hardware exposes timing bugs faster than most classroom demos. Users are effective adversarial tests.\n\n**Repo:** [nandish-jha/reaction_game](https://github.com/nandish-jha/reaction_game)"
+    },
+    {
+      "id": "electronic-card-lock",
+      "title": "Electronic card lock: access control on the bench",
+      "date": "2026-09-01",
+      "category": "project",
+      "tags": ["embedded", "security", "Raspberry Pi"],
+      "excerpt": "A software-based hotel-style card locking / door system — authentication on one side, door behavior on the other.",
+      "published": true,
+      "body": "## What it is\n\n[electronic_card_lock](https://github.com/nandish-jha/electronic_card_lock) is a software-based hotel-style card locking and door-opening system. One path decides whether access is allowed; another path actuates the door behavior.\n\nThe repository also includes LFSR-related work, which is useful when you think about sequences and lightweight pseudo-random structure around tokens or patterns.\n\n## Analogy\n\nA hotel lock is a bouncer with a list. The card presents an identity; the system checks the list; the door mechanism only moves after a yes. Most failures are either \"yes when it should be no\" or \"no when it should be yes.\" Both are unacceptable, for different reasons.\n\n## What I would redo\n\nI would write the threat model for the prototype (what is in scope: lost card, replay, power loss) and define fail-safe behavior explicitly. I would also separate credential check from actuator control in documentation so the control flow is obvious.\n\n## Takeaway\n\nAccess control is a systems problem. Happy-path demos are not enough; failure modes are the design.\n\n**Repo:** [nandish-jha/electronic_card_lock](https://github.com/nandish-jha/electronic_card_lock)"
+    },
+    {
+      "id": "traffic-light-fpga",
+      "title": "Traffic light controller with pedestrian signals on FPGA",
+      "date": "2026-08-30",
+      "category": "project",
+      "tags": ["Verilog", "FPGA", "FSM"],
+      "excerpt": "A Verilog FSM for vehicle and pedestrian lights — illegal states are the real enemy.",
+      "published": true,
+      "body": "## What it is\n\n[traffi_light_controller_with_pedestrian_lights](https://github.com/nandish-jha/traffi_light_controller_with_pedestrian_lights) is a traffic light controller in Verilog for FPGA, including pedestrian signals.\n\n## Analogy\n\nA traffic light is a shared calendar for intersections. Each phase is an appointment: cars go, then stop; pedestrians get a turn; nobody should get two conflicting appointments at once. The finite state machine is that calendar encoded in hardware. Illegal transitions are two green lights that should never coexist.\n\n## What I would redo\n\nI would publish the state diagram next to the RTL and list timing parameters (how long each phase lasts) in one table. I would also add assertions or simulation checks for \"no opposing greens\" so the safety property is tested, not assumed.\n\n## Takeaway\n\nIf the diagram is unclear, the Verilog will be unclear. Pedestrian phases force you to model more than one kind of user.\n\n**Repo:** [nandish-jha/traffi_light_controller_with_pedestrian_lights](https://github.com/nandish-jha/traffi_light_controller_with_pedestrian_lights)"
+    },
+    {
+      "id": "ucosii-binary-game",
+      "title": "Binary arithmetic game on µC/OS-II",
+      "date": "2026-08-30",
+      "category": "project",
+      "tags": ["C", "RTOS", "MicroCOS-II", "embedded"],
+      "excerpt": "A binary math game on an RTOS — where tasks and timing matter as much as the game logic.",
+      "published": true,
+      "body": "## What it is\n\n[ucosii_binary_game_hal](https://github.com/nandish-jha/ucosii_binary_game_hal) is a binary arithmetic game built on µC/OS-II, with HAL-oriented structure across parts in the repository.\n\n## Analogy\n\nBare-metal code is one cook in a kitchen doing every step in order. An RTOS is several cooks with a schedule: one handles input, one updates the display, one enforces timing. The game logic is the recipe; the RTOS is who holds the knife when.\n\n## What I would redo\n\nI would document task priorities and what each task owns (input, display, game state), and I would note timing requirements that would break if a task starved. That is the interview story for RTOS work.\n\n## Takeaway\n\nRTOS projects teach concurrency under constraints. The visible game is the excuse; scheduling discipline is the lesson.\n\n**Repo:** [nandish-jha/ucosii_binary_game_hal](https://github.com/nandish-jha/ucosii_binary_game_hal)"
+    },
+    {
+      "id": "iot-ai-ml-control",
+      "title": "IoT with ML for automated control",
+      "date": "2026-08-29",
+      "category": "project",
+      "tags": ["Python", "ML", "IoT"],
+      "excerpt": "Connecting sensing, models, and action — experiments across an IoT control pipeline in Python/ML.",
+      "published": true,
+      "body": "## What it is\n\n[iot-ai-ml-dl](https://github.com/nandish-jha/iot-ai-ml-dl) explores an IoT system that uses machine learning for automated control. The work is organized across staged notebook/experiment areas in the repository.\n\n## Analogy\n\nA thermostat without a model is a switch with a number. A model without actuators is a weather report. This project lane is about connecting them: sense the environment, decide, then change something in the physical world.\n\n## What I would redo\n\nI would freeze one end-to-end path (sensor → feature → decision → actuator) with clear inputs and outputs, and treat the rest as experiments. Notebooks are good for exploration; a single reproducible pipeline is better for explaining the work later.\n\n## Takeaway\n\nI use ML when the control problem needs it. The center of gravity is still the system: data in, action out, and a way to tell when the decision was wrong.\n\n**Repo:** [nandish-jha/iot-ai-ml-dl](https://github.com/nandish-jha/iot-ai-ml-dl)"
+    },
+    {
+      "id": "xv6-systems-coursework",
+      "title": "xv6 and systems coursework: one shelf",
+      "date": "2026-08-28",
+      "category": "project",
+      "tags": ["C", "xv6", "OS", "systems"],
+      "excerpt": "Threading, synchronization, scheduling, paging, filesystems — coursework that trains debugging instincts for later systems work.",
+      "published": true,
+      "body": "## What this covers\n\nOn GitHub I have a cluster of systems and xv6 labs rather than one giant repository. The shared theme is how an operating system behaves when you change it.\n\nRepresentative repositories:\n\n- [user-level-threading](https://github.com/nandish-jha/user-level-threading)\n- [synchronization-primitives](https://github.com/nandish-jha/synchronization-primitives)\n- [monitors-and-ipc](https://github.com/nandish-jha/monitors-and-ipc)\n- [mlfq-scheduler-simulation](https://github.com/nandish-jha/mlfq-scheduler-simulation)\n- [cpu-scheduling-and-memory](https://github.com/nandish-jha/cpu-scheduling-and-memory)\n- [page-replacement-algorithms](https://github.com/nandish-jha/page-replacement-algorithms)\n- [memory-allocation-monitors](https://github.com/nandish-jha/memory-allocation-monitors)\n- [filesystem-and-disk-io](https://github.com/nandish-jha/filesystem-and-disk-io) / [xv6-filesystem-modifications](https://github.com/nandish-jha/xv6-filesystem-modifications)\n- [listlib-and-system-calls](https://github.com/nandish-jha/listlib-and-system-calls)\n- [xv6-kernel-introduction](https://github.com/nandish-jha/xv6-kernel-introduction)\n- [c-debugging-and-linking](https://github.com/nandish-jha/c-debugging-and-linking)\n\n## Analogy\n\nAn OS is the air traffic control tower for programs: who runs, who waits, who gets memory, who talks to disk. These labs are controlled drills inside that tower — change one rule, watch what crashes.\n\n## Why one post instead of many\n\nThese are coursework milestones. They matter for skill-building. They do not each need a separate marketing page. One shelf is enough to say: I have spent serious time in C, concurrency, scheduling, and xv6 internals.\n\n## What I would redo\n\nFor interview use, I would pick two labs and write a one-page note each: problem, approach, bug I hit, what I would change. Breadth without a deep story is harder to talk about under pressure.\n\n## Takeaway\n\nSystems coursework trains useful paranoia: race conditions and bad page replacements do not care how confident you feel. That mindset transfers to embedded and verification work.\n\nCode: [github.com/nandish-jha](https://github.com/nandish-jha)."
     }
   ]
 }
