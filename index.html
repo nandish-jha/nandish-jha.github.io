@@ -107,114 +107,94 @@
     </div>
   </section>
 
-  <!-- CRAFT / SKILLS -->
+  <!-- CRAFT / SKILLS — dual ledger -->
   <section id="craft" class="panel craft">
     <div class="panel-head">
       <p class="eyebrow reveal">Skill register</p>
       <h2 class="section-display reveal">What I build with</h2>
-      <p class="panel-lede reveal">A balanced stack — verification silicon on one side, shipping software on the other.</p>
+      <p class="panel-lede reveal">One register, two rails — silicon on the left, software on the right, systems where they meet.</p>
     </div>
-    <div class="craft-grid">
-      <article class="craft-card tilt" data-depth="0.5">
-        <div class="craft-top">
-          <span class="card-num">01</span>
-          <span class="craft-side">Hardware</span>
+
+    <div class="craft-ledger">
+      <div class="craft-rail tilt" data-depth="0.35">
+        <div class="craft-rail-head">
+          <span class="craft-rail-num">01</span>
+          <h3>Hardware</h3>
+          <p>Verify, describe, and bring up real silicon.</p>
         </div>
-        <h3>Verification</h3>
-        <p>Constrained-random testbenches, coverage closure, and assertion-driven debug.</p>
-        <div class="card-art art-wave" aria-hidden="true">
-          <span class="art-wave-line"></span>
-          <span class="art-wave-line"></span>
-          <span class="art-wave-line"></span>
-          <span class="art-cov">COV 94%</span>
+        <div class="craft-rows">
+          <article class="craft-row">
+            <div class="craft-row-copy">
+              <h4>Verification</h4>
+              <p>Constrained-random benches, coverage closure, assertion-driven debug.</p>
+            </div>
+            <div class="tag-row">
+              <span>SystemVerilog</span><span>UVM</span><span>Coverage</span><span>Assertions</span>
+            </div>
+          </article>
+          <article class="craft-row">
+            <div class="craft-row-copy">
+              <h4>RTL Design</h4>
+              <p>FPGA flows from RTL to bitstream — Quartus, timing, board bring-up.</p>
+            </div>
+            <div class="tag-row">
+              <span>Verilog</span><span>VHDL</span><span>FPGA</span><span>Quartus</span>
+            </div>
+          </article>
+          <article class="craft-row">
+            <div class="craft-row-copy">
+              <h4>EDA Tools</h4>
+              <p>Simulator and waveform workflows that find the bug before silicon does.</p>
+            </div>
+            <div class="tag-row">
+              <span>QuestaSim</span><span>Cadence</span><span>Synopsys</span><span>GTKWave</span>
+            </div>
+          </article>
         </div>
-        <div class="tag-row">
-          <span>SystemVerilog</span><span>UVM</span><span>Coverage</span><span>Assertions</span>
+      </div>
+
+      <div class="craft-rail tilt" data-depth="0.45">
+        <div class="craft-rail-head">
+          <span class="craft-rail-num">02</span>
+          <h3>Software</h3>
+          <p>Ship interfaces, services, and metal you can hold.</p>
         </div>
-      </article>
-      <article class="craft-card tilt" data-depth="0.6">
-        <div class="craft-top">
-          <span class="card-num">02</span>
-          <span class="craft-side">Hardware</span>
+        <div class="craft-rows">
+          <article class="craft-row">
+            <div class="craft-row-copy">
+              <h4>Languages &amp; apps</h4>
+              <p>Pipelines, services, and products — from scripts to shipped UIs.</p>
+            </div>
+            <div class="tag-row">
+              <span>Python</span><span>C/C++</span><span>Java</span><span>JavaScript</span><span>Kotlin</span>
+            </div>
+          </article>
+          <article class="craft-row">
+            <div class="craft-row-copy">
+              <h4>Embedded</h4>
+              <p>Boards, sensors, and real-time loops on hardware you can hold.</p>
+            </div>
+            <div class="tag-row">
+              <span>RPi</span><span>ESP32</span><span>Pico</span><span>RTOS</span>
+            </div>
+          </article>
+          <article class="craft-row">
+            <div class="craft-row-copy">
+              <h4>Low-level</h4>
+              <p>Kernels, assembly, and the machinery under the abstractions.</p>
+            </div>
+            <div class="tag-row">
+              <span>ARM</span><span>RISC-V</span><span>xv6</span><span>Linux</span>
+            </div>
+          </article>
         </div>
-        <h3>RTL Design</h3>
-        <p>FPGA flows from RTL to bitstream — Quartus, timing, and board bring-up.</p>
-        <div class="card-art art-fpga" aria-hidden="true">
-          <span class="art-cell"></span><span class="art-cell"></span><span class="art-cell"></span>
-          <span class="art-cell"></span><span class="art-cell art-cell-hot"></span><span class="art-cell"></span>
-          <span class="art-cell"></span><span class="art-cell"></span><span class="art-cell"></span>
-        </div>
-        <div class="tag-row">
-          <span>Verilog</span><span>VHDL</span><span>FPGA</span><span>Quartus</span>
-        </div>
-      </article>
-      <article class="craft-card tilt" data-depth="0.45">
-        <div class="craft-top">
-          <span class="card-num">03</span>
-          <span class="craft-side">Hardware</span>
-        </div>
-        <h3>EDA Tools</h3>
-        <p>Simulator and waveform workflows for finding the bug before silicon does.</p>
-        <div class="card-art art-scope" aria-hidden="true">
-          <span class="art-trace"></span>
-          <span class="art-trace art-trace-b"></span>
-          <span class="art-mark">t+</span>
-        </div>
-        <div class="tag-row">
-          <span>QuestaSim</span><span>Cadence</span><span>Synopsys</span><span>GTKWave</span>
-        </div>
-      </article>
-      <article class="craft-card tilt" data-depth="0.55">
-        <div class="craft-top">
-          <span class="card-num">04</span>
-          <span class="craft-side">Software</span>
-        </div>
-        <h3>Software</h3>
-        <p>Pipelines, services, and apps — from scripts to shipped interfaces.</p>
-        <div class="card-art art-code" aria-hidden="true">
-          <span class="art-line"><i></i>def ship():</span>
-          <span class="art-line"><i></i>&nbsp;&nbsp;build()</span>
-          <span class="art-line art-line-dim"><i></i>&nbsp;&nbsp;# deploy</span>
-          <span class="art-line"><i></i>&nbsp;&nbsp;return 0</span>
-        </div>
-        <div class="tag-row">
-          <span>Python</span><span>C/C++</span><span>Java</span><span>JavaScript</span>
-        </div>
-      </article>
-      <article class="craft-card tilt" data-depth="0.65">
-        <div class="craft-top">
-          <span class="card-num">05</span>
-          <span class="craft-side">Both</span>
-        </div>
-        <h3>Embedded</h3>
-        <p>Boards, sensors, and real-time loops on metal you can hold.</p>
-        <div class="card-art art-board" aria-hidden="true">
-          <span class="art-chip-ic"></span>
-          <span class="art-pin"></span><span class="art-pin"></span><span class="art-pin"></span>
-          <span class="art-pin art-pin-r"></span><span class="art-pin art-pin-r"></span><span class="art-pin art-pin-r"></span>
-          <span class="art-label-sm">GPIO</span>
-        </div>
-        <div class="tag-row">
-          <span>RPi</span><span>ESP32</span><span>Pico</span><span>RTOS</span>
-        </div>
-      </article>
-      <article class="craft-card tilt" data-depth="0.5">
-        <div class="craft-top">
-          <span class="card-num">06</span>
-          <span class="craft-side">Both</span>
-        </div>
-        <h3>Low-Level</h3>
-        <p>Kernels, assembly, and the machinery under the abstractions.</p>
-        <div class="card-art art-hex" aria-hidden="true">
-          <span class="art-hex-row">0x7F 0xA4 0x12</span>
-          <span class="art-hex-row">0x00 0xFF 0x3C</span>
-          <span class="art-hex-row art-line-dim">asm volatile</span>
-        </div>
-        <div class="tag-row">
-          <span>ARM</span><span>RISC-V</span><span>xv6</span><span>Linux</span>
-        </div>
-      </article>
+      </div>
     </div>
+
+    <p class="craft-bridge reveal">
+      <span>Overlap</span>
+      Embedded · Systems · Where hardware schedules meet software deadlines
+    </p>
   </section>
 
   <!-- WORK -->
