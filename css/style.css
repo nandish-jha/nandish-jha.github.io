@@ -77,42 +77,79 @@ body {
     pointer-events: none;
     transform: translate3d(-100px, -100px, 0);
     will-change: transform;
+    opacity: 1;
+    transition: opacity 0.2s ease;
   }
   .cursor-inner {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
-    transform: translate(-2px, -2px);
+    gap: 12px;
+    transform: translate(-3px, -2px);
+  }
+  .cursor-mark {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+  .cursor-ring {
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 90, 31, 0.55);
+    background: rgba(255, 90, 31, 0.08);
+    transform: scale(0.35);
+    opacity: 0;
+    transition: transform 0.25s var(--ease), opacity 0.25s ease;
   }
   .cursor-pointer {
-    width: 22px;
-    height: 22px;
-    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    width: 28px;
+    height: 28px;
+    display: block;
     fill: var(--copper);
-    stroke: rgba(10, 10, 10, 0.55);
-    stroke-width: 1.1;
-    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
-    transition: transform 0.2s var(--ease), fill 0.2s;
+    stroke: #0a0a0a;
+    stroke-width: 1.25;
+    paint-order: stroke fill;
+    filter:
+      drop-shadow(0 0 10px rgba(255, 90, 31, 0.55))
+      drop-shadow(0 2px 4px rgba(0, 0, 0, 0.55));
+    transition: fill 0.2s ease, filter 0.2s ease, transform 0.2s var(--ease);
+  }
+  .cursor.is-hover .cursor-ring {
+    opacity: 1;
+    transform: scale(1.85);
   }
   .cursor.is-hover .cursor-pointer {
     fill: var(--copper-soft);
-    transform: scale(1.12);
+    transform: scale(1.06);
+    filter:
+      drop-shadow(0 0 16px rgba(255, 90, 31, 0.75))
+      drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
   }
   .cursor-label {
+    margin-top: 4px;
     font-family: var(--mono);
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.16em;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--copper);
     white-space: nowrap;
+    text-shadow:
+      0 0 18px rgba(255, 90, 31, 0.45),
+      0 1px 2px rgba(0, 0, 0, 0.75);
     opacity: 1;
-    transform: translateY(2px);
-    transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+    transform: translateY(0);
+    transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
   }
   .cursor.is-scrolled .cursor-label {
     opacity: 0;
-    transform: translateX(6px);
+    transform: translateX(8px);
     pointer-events: none;
   }
   .cursor.is-hidden {
