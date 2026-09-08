@@ -47,6 +47,12 @@ body {
   display: none;
 }
 @media (hover: hover) and (pointer: fine) {
+  /* Hide system cursor everywhere — later pointer/grab rules must not win */
+  *,
+  *::before,
+  *::after {
+    cursor: none !important;
+  }
   body,
   a,
   button,
@@ -60,7 +66,7 @@ body {
   select,
   label[for],
   [role="button"] {
-    cursor: none;
+    cursor: none !important;
   }
   .cursor {
     display: block;
