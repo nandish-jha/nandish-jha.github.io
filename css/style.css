@@ -40,20 +40,87 @@ body {
   line-height: 1.65;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath fill='%23ff5a1f' stroke='%230a0a0a' stroke-width='1.2' d='M4 2v20l6.2-5.2L14.8 26l3.2-1.6-4.4-8.8H24z'/%3E%3C/svg%3E") 2 2, auto;
 }
-a,
-button,
-.btn,
-.resume-float,
-.life-track,
-.work-nav,
-input,
-textarea,
-select,
-label[for],
-[role="button"] {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cpath fill='%23ff7a45' stroke='%230a0a0a' stroke-width='1.2' d='M4 2v20l6.2-5.2L14.8 26l3.2-1.6-4.4-8.8H24z'/%3E%3Ccircle cx='20' cy='8' r='3' fill='%23ff5a1f' stroke='%230a0a0a' stroke-width='1'/%3E%3C/svg%3E") 2 2, pointer;
+
+/* Minimal custom cursor + anchored scroll hint (desktop pointer) */
+.cursor {
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  body,
+  a,
+  button,
+  .btn,
+  .resume-float,
+  .life-track,
+  .work-nav,
+  .work-list,
+  input,
+  textarea,
+  select,
+  label[for],
+  [role="button"] {
+    cursor: none;
+  }
+  .cursor {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    pointer-events: none;
+    transform: translate3d(-100px, -100px, 0);
+    will-change: transform;
+  }
+  .cursor-inner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transform: translate(-3.5px, -3.5px);
+  }
+  .cursor-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--copper);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 1px rgba(10, 10, 10, 0.35);
+    transition: transform 0.2s var(--ease), background 0.2s, box-shadow 0.2s;
+  }
+  .cursor.is-hover .cursor-dot {
+    transform: scale(2.1);
+    background: var(--copper-soft);
+    box-shadow: 0 0 0 1px rgba(10, 10, 10, 0.25), 0 0 16px rgba(255, 90, 31, 0.45);
+  }
+  .cursor-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--copper);
+    white-space: nowrap;
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+  }
+  .cursor.is-scrolled .cursor-label {
+    opacity: 0;
+    transform: translateX(6px);
+    pointer-events: none;
+  }
+  .cursor.is-hidden {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cursor { display: none !important; }
+  body, a, button, .btn, .resume-float, .life-track, .work-nav, .work-list {
+    cursor: auto;
+  }
+  a, button, .btn, .resume-float, .life-track, .work-nav {
+    cursor: pointer;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -242,7 +309,7 @@ main { position: relative; z-index: 1; padding-top: 12px; }
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding-bottom: 100px;
+  padding-bottom: 80px;
   max-width: none;
   padding-left: 40px;
   padding-right: 40px;
@@ -305,49 +372,6 @@ main { position: relative; z-index: 1; padding-top: 12px; }
   width: 6px; height: 6px;
   border-radius: 50%;
   background: var(--copper);
-}
-
-/* Intro scroll cue — decorative only, never intercepts clicks */
-.scroll-cue {
-  position: absolute;
-  left: 50%;
-  bottom: max(28px, env(safe-area-inset-bottom, 0px) + 20px);
-  transform: translateX(-50%);
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  pointer-events: none;
-  opacity: 1;
-  transition: opacity 0.45s var(--ease);
-}
-.scroll-cue.is-gone {
-  opacity: 0;
-}
-.scroll-cue-label {
-  font-family: var(--mono);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--copper);
-}
-.scroll-cue-line {
-  display: block;
-  width: 1px;
-  height: 44px;
-  background: linear-gradient(180deg, var(--copper), transparent);
-  transform-origin: top center;
-  animation: scroll-pulse 1.8s ease-in-out infinite;
-}
-@keyframes scroll-pulse {
-  0%, 100% { transform: scaleY(0.55); opacity: 0.35; }
-  50% { transform: scaleY(1); opacity: 1; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .scroll-cue-line { animation: none; opacity: 0.7; }
 }
 
 /* Buttons */
