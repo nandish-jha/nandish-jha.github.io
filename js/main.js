@@ -35,7 +35,7 @@ email.href = "mailto:" + CONFIG.email;
     if (!raf) raf = requestAnimationFrame(render);
   };
 
-  const interactive = "a, button, .btn, .resume-float, .life-track, .work-nav, input, textarea, select, [role='button']";
+  const interactive = "a, button, .btn, .theme-toggle, .resume-float, .life-track, .work-nav, input, textarea, select, [role='button']";
 
   window.addEventListener("pointermove", (e) => {
     if (e.pointerType && e.pointerType !== "mouse") return;

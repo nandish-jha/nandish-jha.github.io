@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>
+(function(){var t="light";try{var s=localStorage.getItem("nj-theme");if(s==="dark"||s==="light")t=s;}catch(e){}document.documentElement.setAttribute("data-theme",t);document.documentElement.style.colorScheme=t;})();
+</script>
 <title>Blog — Nandish Jha</title>
 <meta name="description" content="Stories, tech notes, and project logs from Nandish Jha." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,7 +17,10 @@
 <div class="bg" aria-hidden="true"></div>
 <div class="shell">
   <header class="blog-nav">
-    <a class="mark" href="../">NJ</a>
+    <div class="nav-left">
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode">Dark</button>
+      <a class="mark" href="../">NJ</a>
+    </div>
     <div class="links">
       <a class="home-link" href="../">Portfolio</a>
       <a href="admin.html" class="admin-link">Admin</a>
@@ -36,6 +42,7 @@
 
   <div class="post-list" id="postList" aria-live="polite"></div>
 </div>
+<script src="../js/theme.js"></script>
 <script type="module" src="js/index.js"></script>
 </body>
 </html>

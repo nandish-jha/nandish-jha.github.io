@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>
+(function(){var t="light";try{var s=localStorage.getItem("nj-theme");if(s==="dark"||s==="light")t=s;}catch(e){}document.documentElement.setAttribute("data-theme",t);document.documentElement.style.colorScheme=t;})();
+</script>
 <title>Nandish Jha — Hardware & Software Engineer</title>
 <meta name="description" content="Nandish Jha — Computer Engineering graduate and CS student building across hardware and software: SystemVerilog, UVM, FPGA, embedded, full-stack, and Android." />
 <meta property="og:title" content="Nandish Jha — Hardware & Software Engineer" />
@@ -24,7 +27,10 @@
   <div class="site-bg-horizon"></div>
 </div>
 
-<a class="resume-float" href="assets/Nandish_Jha_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+<button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode">Dark</button>
+<div class="top-actions">
+  <a class="resume-float" href="assets/Nandish_Jha_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+</div>
 
 <div class="cursor" id="siteCursor" aria-hidden="true">
   <div class="cursor-inner">
@@ -407,6 +413,7 @@
   </footer>
 </main>
 
+<script src="js/theme.js"></script>
 <script type="module" src="js/main.js"></script>
 </body>
 </html>
